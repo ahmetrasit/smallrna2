@@ -2,13 +2,6 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
 
-class Project(models.Model):
-    pass
-
-
-class Dataset(models.Model):
-    pass
-
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -55,3 +48,69 @@ class EmailConfirmation(models.Model):
     status = models.BooleanField(default=False)  #True if confirmed, False if waiting
     created_on = models.DateTimeField(auto_now=True)
     confirmed_on = models.DateTimeField(null=True)
+
+
+class ProcessedData(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    description = models.TextField()
+    data_type = models.TextField()
+    path = models.TextField()
+    status = models.CharField(max_length=32)
+    info = models.TextField()
+    created_on = models.DateTimeField(auto_now=True)
+    finished_on = models.DateTimeField(null=True)
+
+
+class Task(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    processed_data = models.ForeignKey(ProcessedData, on_delete=models.DO_NOTHING)
+    status = models.CharField(max_length=32)
+    created_on = models.DateTimeField(auto_now=True)
+    started_on = models.DateTimeField(null=True)
+    finished_on = models.DateTimeField(null=True)
+
+
+class Sample(models.Model):
+    name = models.CharField(max_length=128)
+    description = models.TextField()
+    processed_data = models.ForeignKey(ProcessedData, on_delete=models.DO_NOTHING)
+    created_on = models.DateTimeField(auto_now=True)
+
+
+class Dataset(models.Model):
+    owners = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    samples = models.ForeignKey(Sample, on_delete=models.DO_NOTHING)
+    name = models.CharField(max_length=128)
+    description = models.TextField()
+    public = models.BooleanField(default=False)
+    initial_data_path = models.TextField()
+    created_on = models.DateTimeField(auto_now=True)
+
+
+class Project(models.Model):
+    owners = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    datasets = models.ForeignKey(Dataset, on_delete=models.DO_NOTHING)
+    name = models.CharField(max_length=128)
+    description = models.TextField()
+    public = models.BooleanField(default=False)
+    created_on = models.DateTimeField(auto_now=True)
+
+
+class GUITemplate(models.Model):
+    name = models.CharField(max_length=128)
+    description = models.TextField()
+    type = models.CharField(max_length=64)
+    html_path = models.TextField()
+    created_on = models.DateTimeField(auto_now=True)
+
+
+class Stats(models.Model):
+    type = models.CharField(max_length=64)
+    count = models.IntegerField(default=0)
+    objects = models.TextField()
+    created_on = models.DateTimeField(auto_now=True)
+
+
+
+
+
