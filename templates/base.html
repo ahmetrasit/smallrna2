@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/solid.css" integrity="sha384-ioUrHig76ITq4aEJ67dHzTvqjsAP/7IzgwE7lgJcg2r7BRNGYSK0LwSmROzYtgzs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/fontawesome.css" integrity="sha384-sri+NftO+0hcisDKgr287Y/1LVnInHJ1l+XC7+FOabmTTIK0HnE2ID+xxvJ21c5J" crossorigin="anonymous">
+    <title>Clarify For Me!</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="/">Clarify For Me!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item {% if request.path == "/ask/" %}active {% endif %}"">
+                    <a class="nav-link" href="/ask/">Ask</a>
+                </li>
+                <li class="nav-item {% if request.path == "/tell/" %}active {% endif %}"">
+                    <a class="nav-link" href="/tell/">Tell</a>
+                </li>
+                <li class="nav-item {% if request.path == "/messages/" %}active {% endif %}"">
+                    <a class="nav-link" href="/FAQ/">FAQ</a>
+                </li>
+                <li class="nav-item {% if request.path == "/tutorials/" %}active {% endif %}"">
+                    <a class="nav-link" href="/tutorials/">Tutorials</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/profile/account">{{ user.email }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/sign-out/"><i class="fas fa-sign-out-alt"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="col-md-12 text-center">
+      {% for message in messages %}
+        <div class="alert {{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="col-md-12">
+        <div class="row text-center m-0">
+          {% block content_up %}
+          {% endblock content_up %}
+        </div>
+    </div>
+
+
+
+    {% if user.is_authenticated %}
+      {% if user.is_active %}
+        {% if user.email_confirmed %}
+          <div class="col-md-12">
+              <div class="row text-center m-0">
+                  <div class="col-md-3 " style="text-align: center;">
+                      {% block content_left %}
+                      {% endblock content_left %}
+                  </div>
+                  <div class="col-md-6 p-0" style="text-align: center;">
+                     {% block content_mid %}
+                     {% endblock content_mid %}
+                  </div>
+                  <div class="col-md-3" style="text-align: center;">
+                     {% block content_right %}
+                     {% endblock content_right %}
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-12">
+                     {% block content_bottom %}
+                     {% endblock content_bottom %}
+                  </div>
+              </div>
+          </div>
+          {% else %}
+            <div class="row">
+              <div class="col-md-4"></div>
+              <div class="col-md-4">
+                <form method="post" action="/confirm_email/">
+                  {% csrf_token %}
+                  {{ form.non_field_errors }}
+                  <div class="form-group">
+                    <div class="h2 text-center">Confirmation Code</div>
+                    <p class="text-center" for="id_email_code">Please enter the code sent to your email:</p>
+
+                    <input type="email_code" class="form-control {% if form.email_code.errors %} is-invalid{% endif %}"
+                           id="id_email_code" name="email_code"
+                           value = "{{ form.email_code.value|default:"" }}">
+                    {% if form.email_code.errors %}
+                      <div class="invalid-feedback">
+                        {{ form.email_code.errors }}
+                      </div>
+                    {% endif %}
+                  </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endif %}
+    {% else %}
+      {% if request.path == "/" %}
+      <div class="row">
+        <div class="col-md-2 text-center"></div>
+        <div class="col-md-8 text-center">
+          <div class="jumbotron" style="background:transparent !important">
+            <h1 class="display-5 bg-danger text-white rounded">Got more confused on Google?</h1>
+            <h1 class="display-4 bg-success text-white rounded p-3">Then, ask real people!</h1>
+            <p style="font-size:1.7em" class="text-info">
+              <a clas href="/sign-in/">Sign In</a> | <a href="/sign-up/">Sign Up</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      {% else %}
+        <div class="col-md-12 text-center">
+          <p style="font-size:1.7em" class="text-info">
+            <a clas href="/sign-in/">Sign In</a> | <a href="/sign-up/">Sign Up</a>
+          </p>
+        </div>
+      {% endif %}
+
+
+    {% endif %}
+
+    <script src="{% static "js/jquery.min.js" %}"></script>
+    <script src="{% static "js/popper.min.js" %}" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="{% static "js/bootstrap.min.js" %}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
