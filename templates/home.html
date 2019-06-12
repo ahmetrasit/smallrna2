@@ -2,116 +2,41 @@
 {% load static %}
 {% block content_left %}
     <div class="row border">
-        <div class="col-md-12">
-            Messages
+        <div class="col-md-12 text-left">
+            <h5>Projects</h5>
         </div>
+        <div class="col-md-12 text-left">
+            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createNewProject">
+                + New Project
+            </button>
+        </div>
+        <ol>
+            {% for project in projects %}
+            <li class="col-md-12 text-left" id="project_{{ project.pk }}">
+                {{ project.name }}
+                <p>+ New Dataset</p>
+            </li>
+            {% endfor %}
+        </ol>
     </div>
 {% endblock content_left %}
 
 {% block content_mid %}
-    <div class="col-md-12 text-center">
-        <div class="jumbotron m-2 pt-3 border-left border-right" style="background:transparent !important">
-            <h1 class="display-4">What's in your mind?</h1>
-            <p class="lead">Ask real people when generic answers are confusing!</p>
 
-            <div class="form-group">
-                <input class="form-control"  type="text">
-            </div>
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="input-group mb-3">
-                      <select class="custom-select" id="inputGroupSelect01">
-                        <option selected>What type of question?</option>
-                        <option value="1">Quick Question</option>
-                        <option value="2">Short clarification</option>
-                        <option value="3">Detailed explanation</option>
-                      </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-group mb-3">
-                      <select class="custom-select" id="inputGroupSelect01">
-                        <option selected>How many people will answer?</option>
-                        <option value="1">Single</option>
-                        <option value="2">Duel</option>
-                        <option value="3">Wisdom of Crowd</option>
-                      </select>
-                    </div>
-                </div>
-            </div>
-
-                <div class="row">
-                    <div class="form-check form-check-inline col-sm-4 m-0 justify-content-center">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                        <label class="form-check-label" id="quick" data-placement="bottom"
-                             data-content="1 minute explanation with a single reference"
-                             onmouseover="$('#quick').popover('show')"
-                             onmouseleave="$('#quick').popover('hide')">
-                             Quick
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline col-sm-4 m-0 justify-content-center">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                        <label class="form-check-label" id="short" data-placement="bottom"
-                             data-content="5+ minute explanation with at least 2 references"
-                             onmouseover="$('#short').popover('show')"
-                             onmouseleave="$('#short').popover('hide')">
-                            Short
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline col-sm-4 m-0 justify-content-center">
-                          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                          <label class="form-check-label" id="detailed" data-placement="bottom"
-                                 data-content="10+ minute explanation with at least 3 references"
-                                 onmouseover="$('#detailed').popover('show')"
-                                 onmouseleave="$('#detailed').popover('hide')">
-                              Detailed
-                          </label>
-                    </div>
-                </div>
-
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="form-check form-check-inline col-sm-4 m-0 justify-content-center">
-                        <input class="form-check-input" type="radio" name="number_of_answerers" checked>
-                        <label class="form-check-label" id="single" data-placement="bottom"
-                             data-content="Selected 1 person answers the question. You'll decide the answerer."
-                             onmouseover="$('#single').popover('show')"
-                             onmouseleave="$('#single').popover('hide')">
-                            Single
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline col-sm-4 m-0 justify-content-center">
-                          <input class="form-check-input" type="radio" name="number_of_answerers">
-                          <label class="form-check-label" id="duel" data-placement="bottom"
-                                 data-content="2 people answers the same question. Great for different points of view!"
-                                 onmouseover="$('#duel').popover('show')"
-                                 onmouseleave="$('#duel').popover('hide')">
-                              Duel
-                          </label>
-                    </div>
-                    <div class="form-check form-check-inline col-sm-4 m-0 justify-content-center">
-                          <input class="form-check-input" type="radio" name="number_of_answerers">
-                          <label class="form-check-label" id="competition" data-placement="bottom"
-                                 data-content="Let 3 or more people answer it. Wisdom of Crowd!"
-                                 onmouseover="$('#competition').popover('show')"
-                                 onmouseleave="$('#competition').popover('hide')">
-                              Competition
-                          </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
 {% endblock content_mid %}
 
 {% block content_right %}
-    <div class="row border">
-        <div class="col-md-12">
-            Answers/Questions
+    <div class="row">
+        <div class="col-md-12 border">
+            Messages
         </div>
+         <ol>
+            {% for message in new_messages %}
+            <li class="col-md-12 text-left" id="project_{{ message.pk }}">
+                {{ message.name }}
+            </li>
+            {% endfor %}
+        </ol>
     </div>
 {% endblock content_right %}
 

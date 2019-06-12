@@ -107,7 +107,7 @@ class GUITemplate(models.Model):
 class Stats(models.Model):
     type = models.CharField(max_length=64)
     count = models.IntegerField(default=0)
-    objects = models.TextField()
+    object_list = models.TextField()
     created_on = models.DateTimeField(auto_now=True)
 
 
