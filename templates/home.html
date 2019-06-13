@@ -1,6 +1,7 @@
 {% extends 'base.html'%}
 {% load static %}
 {% block content_left %}
+  {{ deneme }}
     <div class="row border">
         <div class="col-md-12 text-left">
             <h5>Projects</h5>
@@ -10,14 +11,14 @@
                 + New Project
             </button>
         </div>
-        <ol>
+        <ul>
             {% for project in projects %}
             <li class="col-md-12 text-left" id="project_{{ project.pk }}">
                 {{ project.name }}
                 <p>+ New Dataset</p>
             </li>
             {% endfor %}
-        </ol>
+        </ul>
     </div>
 {% endblock content_left %}
 
@@ -42,4 +43,9 @@
 
 {% block content_bottom %}
 
+
+
+  {% include "_modal_create_project.html" %}
 {% endblock content_bottom %}
+
+

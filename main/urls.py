@@ -5,7 +5,8 @@ from main import views, forms
 
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('', views.Home.as_view(), name='home'),
+    path('create_project/', views.create_project, name='create_project'),
     #path('ask/', TemplateView.as_view(template_name='home.html'), name='ask'),
     #path('tell/', views.tell, name='tell'),
     #path('contact/', views.ContactUsView.as_view(), name='contact'),

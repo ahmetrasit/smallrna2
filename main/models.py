@@ -88,10 +88,10 @@ class Dataset(models.Model):
 
 
 class Project(models.Model):
+    name = models.CharField(max_length=128, primary_key=True)
+    description = models.TextField(null=False)
     owners = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    datasets = models.ForeignKey(Dataset, on_delete=models.DO_NOTHING)
-    name = models.CharField(max_length=128)
-    description = models.TextField()
+    datasets = models.ForeignKey(Dataset, on_delete=models.DO_NOTHING, null=True)
     public = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now=True)
 

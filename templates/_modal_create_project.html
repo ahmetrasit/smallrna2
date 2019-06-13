@@ -1,0 +1,32 @@
+
+<div class="modal fade" id="createNewProject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createNewProjectTitle">Create New Project</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/create_project/" method="post">
+        {% csrf_token %}
+        <div class="modal-body">
+        <div class="col-md-12">
+          <div class="form-group mt-3">
+            <input type="text" name="create_project_name" id="create_project_name" class="form-control" required autofocus maxlength="128">
+            <label class="form-control-placeholder" for="create_project_name">Project Name</label>
+          </div>
+          <div class="form-group mt-4">
+            <textarea name="create_project_description" id="create_project_description" class="form-control" rows="3" required></textarea>
+            <label class="form-control-placeholder" for="create_project_description">Description</label>
+          </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" role="button" class="btn btn-primary">Create!</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

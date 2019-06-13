@@ -12,6 +12,11 @@ from random import randint
 logger = logging.getLogger(__name__)
 
 
+class CreateProjectForm(forms.Form):
+    create_project_name = forms.CharField(min_length=3, max_length=128)
+    create_project_description = forms.CharField(min_length=3)
+
+
 class EmailConfirmationForm(forms.Form):
     email_code = forms.CharField(min_length=6, max_length=6)
 
