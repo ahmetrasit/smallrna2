@@ -24,14 +24,17 @@ def create_project(request):
         form = forms.CreateProjectForm(request.POST)
         if form.is_valid():
             try:
-                new_project = models.Project.objects.create(
-                    owners=request.user,
-                    name=form.cleaned_data['create_project_name'],
-                    description=form.cleaned_data['create_project_description']
-                )
-                messages.success(request, 'Project created!')
+                if models.Project.objects.filter(owner=request.user, name=form.cleaned_data['create_project_name']):
+                    messages.error(request, 'Project with the same name already exists')
+                else:
+                    models.Project.objects.create(
+                        owner=request.user,
+                        name=form.cleaned_data['create_project_name'],
+                        description=form.cleaned_data['create_project_description']
+                    )
+                    messages.success(request, 'Project created!')
             except:
-                messages.error(request, 'Project with the same name already exists')
+                messages.error(request, 'Internal problem creating a new project, please contact admin.')
         else:
             messages.error(request, 'form invalid')
         return redirect('/')
@@ -40,7 +43,7 @@ def create_project(request):
 
 class Home(View):
     def get(self, request, *args, **kwargs):
-        context = {'projects': models.Project.objects.all()}
+        context = {'projects': models.Project.objects.filter(owner=request.user)}
         return render(request, "home.html", context=context)
 
 class EmailConfirmationView(LoginRequiredMixin, FormView):

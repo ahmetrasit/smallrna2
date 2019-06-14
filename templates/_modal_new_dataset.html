@@ -1,0 +1,88 @@
+<div class="modal fade" id="newDatasetModal" tabindex="-1" role="dialog" aria-labelledby="Add New Dataset" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addDatasetTitle">Add New Dataset</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p class="lead">Upload FASTQ files</p>
+            <div class="input-group mb-3">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="fileupload" multiple>
+                <label class="custom-file-label" for="fileupload">Choose file(s)</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" id="debarcodingSelection">
+          <div onclick="needsDebarcoding()" class="jumbotron col-md-6 bg-white text-center jumbotron-link text-black-50">
+            <h1 class="display-5">Needs Debarcoding</h1>
+            <p class="lead">Upload FASTQ files</p>
+          </div>
+          <div onclick="noDebarcoding()" class="jumbotron col-md-6 bg-white text-center jumbotron-link text-black-50">
+            <h1 class="display-5">No Need to Debarcode</h1>
+            <p class="lead">Use already uploaded data</p>
+          </div>
+        </div>
+        <div class="row d-none" id="new_dataset_info">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="form-group col-md-4">
+                <input type="text" name="new_dataset_name" id="new_dataset_name" class="form-control" required autofocus maxlength="128">
+                <label class="form-control-placeholder" for="new_dataset_name">Dataset Name</label>
+              </div>
+              <div class="form-group col-md-8">
+                <input name="new_dataset_description" id="new_dataset_description" class="form-control" rows="1" required></input>
+                <label class="form-control-placeholder" for="new_dataset_description">Description</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row d-none" id="needsDebarcoding">
+          <div class="col-md-12">
+            <div class="bg-danger text-white text-center lead">Please upload .fastq.gz file(s) first.</div>
+          </div>
+        </div>
+
+        <div class="row d-none" id="noDebarcoding">
+          <div class="col-md-12">
+            <div class="bg-danger text-white text-center lead">Please upload .fastq.gz file(s) first.</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  $('#newDatasetModal').on('hidden.bs.modal', function (e) {
+      console.log('hidden')
+      $('#debarcodingSelection').addClass('d-flex')
+      $('#needsDebarcoding').removeClass('d-flex').addClass('d-none')
+      $('#noDebarcoding').removeClass('d-flex').addClass('d-none')
+      $('#new_dataset_info').removeClass('d-flex').addClass('d-none')
+})
+
+  function needsDebarcoding() {
+      $('#debarcodingSelection').removeClass('d-flex').addClass('d-none')
+      $('#needsDebarcoding').addClass('d-flex')
+      $('#new_dataset_info').addClass('d-flex')
+  }
+
+  function noDebarcoding() {
+      $('#debarcodingSelection').removeClass('d-flex').addClass('d-none')
+      $('#noDebarcoding').addClass('d-flex')
+      $('#new_dataset_info').addClass('d-flex')
+
+  }
+</script>

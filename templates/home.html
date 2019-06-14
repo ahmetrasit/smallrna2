@@ -7,15 +7,18 @@
             <h5>Projects</h5>
         </div>
         <div class="col-md-12 text-left">
-            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createNewProject">
+            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createNewProjectModal">
                 + New Project
             </button>
         </div>
         <ul>
             {% for project in projects %}
-            <li class="col-md-12 text-left" id="project_{{ project.pk }}">
+            <li class="col-md-12 text-left border p-0 mt-2 mb-2" id="project_{{ project.pk }}">
                 {{ project.name }}
-                <p>+ New Dataset</p>
+                <br>
+                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addDatasetModal">
+                    + Add Dataset
+                </button>
             </li>
             {% endfor %}
         </ul>
@@ -46,6 +49,9 @@
 
 
   {% include "_modal_create_project.html" %}
+  {% include "_modal_add_dataset.html" %}
+  {% include "_modal_new_dataset.html" %}
+  {% include "_modal_choose_dataset.html" %}
 {% endblock content_bottom %}
 
 

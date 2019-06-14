@@ -78,7 +78,7 @@ class Sample(models.Model):
 
 
 class Dataset(models.Model):
-    owners = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     samples = models.ForeignKey(Sample, on_delete=models.DO_NOTHING)
     name = models.CharField(max_length=128)
     description = models.TextField()
@@ -88,10 +88,11 @@ class Dataset(models.Model):
 
 
 class Project(models.Model):
-    name = models.CharField(max_length=128, primary_key=True)
+    name = models.CharField(max_length=128)
     description = models.TextField(null=False)
-    owners = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    datasets = models.ForeignKey(Dataset, on_delete=models.DO_NOTHING, null=True)
+    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    other_users = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, related_name='other_users')
+    dataset = models.ForeignKey(Dataset, on_delete=models.DO_NOTHING, null=True)
     public = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now=True)
 
