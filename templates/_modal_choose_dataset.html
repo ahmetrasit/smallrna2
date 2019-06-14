@@ -1,0 +1,41 @@
+
+<div class="modal fade" id="addDatasetModal" tabindex="-1" role="dialog" aria-labelledby="Add Dataset to the Project" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addDatasetTitle">Add Dataset to the Project</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div onclick="openNewDatasetModal()" class="jumbotron col-md-6 bg-white text-center jumbotron-link text-black-50">
+            <h1 class="display-5">Create New Dataset</h1>
+            <p class="lead">Upload FASTQ files</p>
+          </div>
+          <div onclick="openChooseDatasetModal()" class="jumbotron col-md-6 bg-white text-center jumbotron-link text-black-50">
+            <h1 class="display-5">Choose Existing Dataset</h1>
+            <p class="lead">Use already uploaded data</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  function openNewDatasetModal() {
+      $('#addDatasetModal').modal('hide')
+      $('#newDatasetModal').modal('show')
+  }
+
+  function openChooseDatasetModal() {
+      $('#addDatasetModal').modal('hide')
+      $('#chooseDatasetModal').modal('show')
+  }
+</script>
