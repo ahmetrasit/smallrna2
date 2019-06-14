@@ -10,7 +10,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-12 text-center">
-            <p class="lead">Upload FASTQ files</p>
+            <p class="lead">Upload <b>.fastq.gz files</b></p>
             <div class="input-group mb-3">
               <div class="custom-file">
                 <input type="file" class="custom-file-input" id="fileupload" multiple>
@@ -26,7 +26,7 @@
           </div>
           <div onclick="noDebarcoding()" class="jumbotron col-md-6 bg-white text-center jumbotron-link text-black-50">
             <h1 class="display-5">No Need to Debarcode</h1>
-            <p class="lead">Use already uploaded data</p>
+            <p class="lead">Use already debarcoded data / files</p>
           </div>
         </div>
         <div class="row d-none" id="new_dataset_info">
@@ -37,7 +37,7 @@
                 <label class="form-control-placeholder" for="new_dataset_name">Dataset Name</label>
               </div>
               <div class="form-group col-md-8">
-                <input name="new_dataset_description" id="new_dataset_description" class="form-control" rows="1" required></input>
+                <input name="new_dataset_description" id="new_dataset_description" class="form-control" required/>
                 <label class="form-control-placeholder" for="new_dataset_description">Description</label>
               </div>
             </div>
@@ -45,15 +45,32 @@
         </div>
 
         <div class="row d-none" id="needsDebarcoding">
-          <div class="col-md-12">
-            <div class="bg-danger text-white text-center lead">Please upload .fastq.gz file(s) first.</div>
-          </div>
+            <div class="col-md-12 no-file-uploaded">
+                <div class="bg-danger text-white text-center lead rounded">Please upload .fastq.gz file(s) first.</div>
+            </div>
+        </div>
+        <div class="row mt-4" id="needsDebarcoding">
+            <div class="form-group col-md-3">
+                <input type="text" name="new_dataset_barcode" id="new_dataset_barcode" class="form-control" required maxlength="32">
+                <label class="form-control-placeholder" for="new_dataset_barcode">Barcode</label>
+            </div>
+            <div class="form-group col-md-3">
+                <input type="text" name="new_dataset_sample_name" id="new_dataset_sample_name" class="form-control" required maxlength="32">
+                <label class="form-control-placeholder" for="new_dataset_sample_name">Sample Name</label>
+            </div>
+            <div class="form-group col-md-5">
+                <input type="text" name="new_dataset_sample_description" id="new_dataset_sample_description" class="form-control" required/>
+                <label class="form-control-placeholder" for="new_dataset_sample_description">Sample Description</label>
+            </div>
+            <div class="form-group col-md-1">
+                <button class="btn form-control text-white bg-success"><span class="">+</span></button>
+            </div>
         </div>
 
         <div class="row d-none" id="noDebarcoding">
-          <div class="col-md-12">
-            <div class="bg-danger text-white text-center lead">Please upload .fastq.gz file(s) first.</div>
-          </div>
+            <div class="col-md-12 no-file-uploaded">
+                <div class="bg-danger text-white text-center lead">Please upload .fastq.gz file(s) first.</div>
+            </div>
         </div>
       </div>
       <div class="modal-footer">
@@ -66,7 +83,7 @@
 
 <script>
   $('#newDatasetModal').on('hidden.bs.modal', function (e) {
-      console.log('hidden')
+      console.log('hidden');
       $('#debarcodingSelection').addClass('d-flex')
       $('#needsDebarcoding').removeClass('d-flex').addClass('d-none')
       $('#noDebarcoding').removeClass('d-flex').addClass('d-none')
@@ -83,6 +100,26 @@
       $('#debarcodingSelection').removeClass('d-flex').addClass('d-none')
       $('#noDebarcoding').addClass('d-flex')
       $('#new_dataset_info').addClass('d-flex')
-
   }
+
+  $('#fileupload').change(function(d){
+      var fileNames = [];
+      var fileListTemp= $('#fileupload').prop('files')
+      for(var i = 0; i<fileListTemp['length']; i++){
+          console.log(fileListTemp[i].name, fileListTemp[i].type)
+          if(fileListTemp[i].name.match(/.fastq.gz$/)){
+              console.log('match', fileListTemp[i].name)
+              fileNames.push(fileListTemp[i].name)
+          }
+      }
+
+      if(fileNames.length > 0){
+          $('#barcodes').removeClass('d-none').addClass('d-flex')
+          $('.no-file-uploaded').removeClass('d-flex').addClass('d-none')
+      }
+      else {
+          $('#barcodes').removeClass('d-flex').addClass('d-none')
+          $('.no-file-uploaded').removeClass('d-none').addClass('d-flex')
+      }
+  })
 </script>

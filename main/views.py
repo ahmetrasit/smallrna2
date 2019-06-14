@@ -42,8 +42,10 @@ def create_project(request):
 
 
 class Home(View):
-    def get(self, request, *args, **kwargs):
-        context = {'projects': models.Project.objects.filter(owner=request.user)}
+    def get(self, request):
+        context = {}
+        if request.user.is_authenticated:
+            context = {'projects': models.Project.objects.filter(owner=request.user)}
         return render(request, "home.html", context=context)
 
 class EmailConfirmationView(LoginRequiredMixin, FormView):
