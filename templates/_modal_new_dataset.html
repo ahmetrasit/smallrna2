@@ -7,8 +7,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <div class="row">
+      <div class="modal-body" id="newDatasetModalBody">
+        <div class="row d-none" id="fileupload_div">
           <div class="col-md-12 text-center">
             <p class="lead">Upload <b>.fastq.gz files</b></p>
             <div class="input-group mb-3">
@@ -48,28 +48,16 @@
             <div class="col-md-12 no-file-uploaded">
                 <div class="bg-danger text-white text-center lead rounded">Please upload .fastq.gz file(s) first.</div>
             </div>
+            <div class="form-group col-md-12 addBarcodeButton d-none">
+                <button class="btn form-control text-white bg-success" onclick="addBarcodeInput()"><span class="">Add Barcode</span></button>
+            </div>
+            <div class="col-md-12 barcodeInputs"></div>
         </div>
-        <div class="row mt-4" id="needsDebarcoding">
-            <div class="form-group col-md-3">
-                <input type="text" name="new_dataset_barcode" id="new_dataset_barcode" class="form-control" required maxlength="32">
-                <label class="form-control-placeholder" for="new_dataset_barcode">Barcode</label>
-            </div>
-            <div class="form-group col-md-3">
-                <input type="text" name="new_dataset_sample_name" id="new_dataset_sample_name" class="form-control" required maxlength="32">
-                <label class="form-control-placeholder" for="new_dataset_sample_name">Sample Name</label>
-            </div>
-            <div class="form-group col-md-5">
-                <input type="text" name="new_dataset_sample_description" id="new_dataset_sample_description" class="form-control" required/>
-                <label class="form-control-placeholder" for="new_dataset_sample_description">Sample Description</label>
-            </div>
-            <div class="form-group col-md-1">
-                <button class="btn form-control text-white bg-success"><span class="">+</span></button>
-            </div>
-        </div>
+
 
         <div class="row d-none" id="noDebarcoding">
             <div class="col-md-12 no-file-uploaded">
-                <div class="bg-danger text-white text-center lead">Please upload .fastq.gz file(s) first.</div>
+                <div class=" bg-danger text-white text-center lead rounded">Please upload .fastq.gz file(s) first.</div>
             </div>
         </div>
       </div>
@@ -82,44 +70,119 @@
 
 
 <script>
+
+
+    var emptyFilelist = $('#fileupload').prop('files')
   $('#newDatasetModal').on('hidden.bs.modal', function (e) {
       console.log('hidden');
       $('#debarcodingSelection').addClass('d-flex')
       $('#needsDebarcoding').removeClass('d-flex').addClass('d-none')
       $('#noDebarcoding').removeClass('d-flex').addClass('d-none')
       $('#new_dataset_info').removeClass('d-flex').addClass('d-none')
-})
+      $('#fileupload_div').removeClass('d-flex').addClass('d-none')
+      $('.addBarcodeButton').removeClass('d-flex').addClass('d-none')
+      d3.selectAll('.noDebarcodingFile').remove()
+      d3.selectAll('.barcodeInput').remove()
+      $('.custom-file-label').text('Choose file(s)')
+      $('#fileupload').val('');
+      $('.no-file-uploaded').removeClass('d-none').addClass('d-block')
+  })
 
   function needsDebarcoding() {
       $('#debarcodingSelection').removeClass('d-flex').addClass('d-none')
       $('#needsDebarcoding').addClass('d-flex')
       $('#new_dataset_info').addClass('d-flex')
+      new_dataset_focus = 'needs debarcoding'
+      $('#fileupload_div').addClass('d-flex')
   }
 
   function noDebarcoding() {
       $('#debarcodingSelection').removeClass('d-flex').addClass('d-none')
       $('#noDebarcoding').addClass('d-flex')
       $('#new_dataset_info').addClass('d-flex')
+      new_dataset_focus = 'no debarcoding'
+      $('#fileupload_div').addClass('d-flex')
   }
 
+  var new_dataset_focus = ''
   $('#fileupload').change(function(d){
       var fileNames = [];
       var fileListTemp= $('#fileupload').prop('files')
       for(var i = 0; i<fileListTemp['length']; i++){
-          console.log(fileListTemp[i].name, fileListTemp[i].type)
+          //console.log(fileListTemp[i].name, fileListTemp[i].type)
           if(fileListTemp[i].name.match(/.fastq.gz$/)){
-              console.log('match', fileListTemp[i].name)
+              //console.log('match', fileListTemp[i].name)
               fileNames.push(fileListTemp[i].name)
           }
       }
-
-      if(fileNames.length > 0){
-          $('#barcodes').removeClass('d-none').addClass('d-flex')
-          $('.no-file-uploaded').removeClass('d-flex').addClass('d-none')
-      }
-      else {
+      console.log(new_dataset_focus)
+      if (fileNames.length > 0){
+        $('.custom-file-label').text(fileNames.length + ' file(s) selected')
+        if (new_dataset_focus === 'needs debarcoding'){
+            addBarcodeInput()
+        } else {
+            populateNoDebarcodingFileList(fileNames)
+        }
+        $('.barcodeInput').removeClass('d-none').addClass('d-flex')
+        $('.no-file-uploaded').removeClass('d-block').addClass('d-none')
+        $('.addBarcodeButton').removeClass('d-none').addClass('d-flex')
+      } else {
+          $('.custom-file-label').text('Choose file(s)')
           $('#barcodes').removeClass('d-flex').addClass('d-none')
-          $('.no-file-uploaded').removeClass('d-none').addClass('d-flex')
+          $('.no-file-uploaded').removeClass('d-none').addClass('d-block')
+          $('.addBarcodeButton').removeClass('d-flex').addClass('d-none')
+          $('.barcodeInput').removeClass('d-flex').addClass('d-none')
       }
+
+
   })
+
+
+    function populateNoDebarcodingFileList(filelist) {
+        console.log('pndfl', filelist)
+        d3.selectAll('.noDebarcodingFile').remove()
+
+        var file_definitions = d3.select('#newDatasetModalBody').selectAll('div.noDebarcodingFile').data(filelist).enter()
+            .append('div').attr('class', 'form-row noDebarcodingFile row-hover p-1 m-1 rounded align-items-center')
+
+        file_definitions.append('div').attr('class', 'form-group-sm col-md-3')
+            .append('input').attr('type', 'text').attr('name', function(d,i){return 'noDebarcoding_sampleName_'+i})
+            .attr('id', function(d,i){return 'noDebarcoding_sampleName_'+i})
+            .attr('class', 'form-control').attr('maxlength' , '32')
+            .attr('placeholder', 'Sample Name')
+        file_definitions.append('div')
+            .attr('id', function(d,i){return 'noDebarcoding_fileName_'+i})
+            .attr('class', 'form-group-sm col-md-9 font-italic border-bottom')
+            .html(function(d,i){return d})
+    }
+
+
+  function addBarcodeInput() {
+        var barcode_id = $('.barcodeInput').length + 1
+        var curr_main = d3.select('div.barcodeInputs').append('div')
+            .attr('class', 'barcodeInput row').attr('id', 'barcode_'+barcode_id)
+
+        var barcode_input = curr_main.append('div').attr('class', 'form-group col-md-3')
+        barcode_input.append('input').attr('class', 'form-control').attr('type', 'text').attr('id', 'new_barcode'+barcode_id)
+            .attr('name', 'new_barcode'+barcode_id).attr('required', true).attr('autofocus', true).attr('max_length', '128')
+            .style('text-transform', 'uppercase')
+        barcode_input.append('label').attr('class', 'form-control-placeholder text-muted').attr('for', 'new_barcode'+barcode_id).text('Barcode Sequence')
+
+        var sample_input = curr_main.append('div').attr('class', 'form-group col-md-8')
+        sample_input.append('input').attr('class', 'form-control').attr('type', 'text').attr('id', 'new_sample'+barcode_id)
+            .attr('name', 'new_sample'+barcode_id).attr('required', true).attr('autofocus', true).attr('max_length', '128')
+        sample_input.append('label').attr('class', 'form-control-placeholder text-muted').attr('for', 'new_sample'+barcode_id).text('Sample Name')
+
+        curr_main.append('div').attr('class', 'form-group col-md-1')
+            .append('button')
+                .attr('onclick', 'removeBarcode(' + barcode_id + ')')
+                .attr('class', 'btn form-control text-white bg-danger')
+                .append('span').html('-')
+
+    }
+
+    function removeBarcode(barcode_id){
+        d3.select('#barcode_'+barcode_id).remove()
+    }
 </script>
+
