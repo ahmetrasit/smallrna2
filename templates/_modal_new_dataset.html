@@ -136,11 +136,13 @@
         $('.no-file-uploaded').removeClass('d-block').addClass('d-none')
         $('.addBarcodeButton').removeClass('d-none').addClass('d-flex')
       } else {
+          d3.selectAll('.noDebarcodingFile').remove()
           $('.custom-file-label').text('Choose file(s)')
           $('#barcodes').removeClass('d-flex').addClass('d-none')
           $('.no-file-uploaded').removeClass('d-none').addClass('d-block')
           $('.addBarcodeButton').removeClass('d-flex').addClass('d-none')
           $('.barcodeInput').removeClass('d-flex').addClass('d-none')
+          d3.selectAll('div.barcodeInput').remove()
       }
   })
 
@@ -170,7 +172,15 @@
     }
 
   function addBarcodeInput() {
-        var barcode_id = $('.barcodeInput').length + 1
+        var barcode_id;
+        var latest_barcode_id = Math.max(...$('.barcodeInput').map(function (){return parseInt(this.id.replace('barcode_', '')) }).toArray())
+        console.log(latest_barcode_id)
+        if(latest_barcode_id>0){
+            barcode_id = latest_barcode_id + 1
+        }else{
+            barcode_id = 1
+        }
+
         var curr_main = d3.select('div.barcodeInputs').append('div')
             .attr('class', 'barcodeInput row').attr('id', 'barcode_'+barcode_id)
 
@@ -229,6 +239,9 @@
 
     function removeBarcode(barcode_id){
         d3.select('#barcode_'+barcode_id).remove()
+        if($('.barcodeInput').length == 0){
+            addBarcodeInput()
+        }
     }
 </script>
 
