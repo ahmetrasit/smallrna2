@@ -55,10 +55,10 @@
             <div class="input-group-sm col-md-12 addBarcodeButton d-none mb-1 mt-0">
               <div class="input-group-prepend">
                 <div class="input-group-text">
-                  <input type="checkbox" aria-label="Remove adapters?" name="remove_adapter" checked> <span class="pl-2"> Remove Adapter: </span>
+                  <input type="checkbox" aria-label="Remove adapters?" name="remove_adapter" id="remove_adapter" checked> <span class="pl-2"> Remove Adapter: </span>
                 </div>
               </div>
-              <input type="text" class="form-control" aria-label="Adapter sequence" name="adapter_sequence" value="AGATCGGAA" style="text-transform: uppercase">
+              <input type="text" class="form-control" aria-label="Adapter sequence" id="adapter_sequence" name="adapter_sequence" value="AGATCGGAA" style="text-transform: uppercase">
             </div>
 
 
@@ -73,6 +73,7 @@
         </div>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="createDataset()">Create Dataset</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -96,6 +97,7 @@
       $('.custom-file-label').text('Choose file(s)')
       $('#fileupload').val('');
       $('.no-file-uploaded').removeClass('d-none').addClass('d-block')
+      new_dataset_focus = ''
   })
 
   function needsDebarcoding() {
@@ -114,14 +116,85 @@
       $('#fileupload_div').addClass('d-flex')
   }
 
+  function createDataset() {
+    if(inputsValid()){
+        alert('ready to submit')
+    }else{
+        alert('not ready!')
+    }
+  }
+
+
+  function inputsValid() {
+      checkFileNames()
+      checkDatasetName()
+      checkDatasetDescription()
+      checkAdapter()
+      checkBarcodes()
+
+  }
+
+  function checkDatasetName(){
+      return $('#new_dataset_name').val().trim()
+  }
+
+  function checkDatasetDescription(){
+      return $('#new_dataset_description').val().trim()
+  }
+
+  function checkAdapter(){
+      if($('#remove_adapter').prop('checked')){
+          var sequence = ('#adapter_sequence').val().trim().toUpperCase()
+          return sequence.length > 5 & checkNucleotides(sequence)
+      }
+      return true
+  }
+
+  function checkBarcodes(){
+      barcode_names = []
+      $('.barcodeInput').each(function(){
+          var seq = $(this).find('input.barcode_sequence').val()
+          var name = $(this).find('input.barcode_sample_name').val()
+          barcodes.push([seq, name])
+          barcode_names.push(name)
+      })
+
+      var duplicate_names = barcode_names.reduce(function(acc, el, i, arr) {
+        if (arr.indexOf(el) !== i && acc.indexOf(el) < 0) acc.push(el); return acc;
+      }, []);
+
+      var duplicate_count;
+      //continue checking duplicates and add _N to the sample names
+
+  }
+
+  function checkNucleotides(sequence){
+      var allowed = ['A', 'T', 'G', 'C']
+      var i = sequence.length;
+      while (i--) {
+        if( !allowed.includes(sequence.charAt(i)) ){
+            return false
+        }
+      }
+      return true
+  }
+
+  function checkFileNames() {
+      var fileNames = []
+      for(var i = 0; i<fileListTemp['length']; i++){
+          if(fileListTemp[i].name.match(/.fastq.gz$/)){
+              fileNames.push(fileListTemp[i].name)
+          }
+      }
+      return fileNames
+  }
+
   var new_dataset_focus = ''
   $('#fileupload').change(function(d){
       var fileNames = [];
       var fileListTemp= $('#fileupload').prop('files')
       for(var i = 0; i<fileListTemp['length']; i++){
-          //console.log(fileListTemp[i].name, fileListTemp[i].type)
           if(fileListTemp[i].name.match(/.fastq.gz$/)){
-              //console.log('match', fileListTemp[i].name)
               fileNames.push(fileListTemp[i].name)
           }
       }
@@ -196,6 +269,7 @@
             {'id':'175', 'seq':'ACTTGATG'},
             {'id':'176', 'seq':'GATCAGTT'}
         ]
+
         var barcode_dropdown = curr_main.append('div').attr('class', 'col-md-6 mt-2').append('div').attr('class', 'input-group')
         var barcode_prepend = barcode_dropdown.append('div').attr('class', 'input-group-prepend form-group')
         barcode_prepend.append('select').on('change', fillBarcodeSeq)
@@ -208,24 +282,13 @@
         barcode_dropdown.append('div').attr('class', 'form-control text-center bg-light justify-content-center').html('or')
 
         var barcode_input = barcode_dropdown.append('div').attr('class', 'form-group')
-        barcode_input.append('input').attr('class', 'form-control').attr('type', 'text').attr('id', 'new_barcode_'+barcode_id)
+        barcode_input.append('input').attr('class', 'form-control barcode_sequence').attr('type', 'text').attr('id', 'new_barcode_'+barcode_id)
             .attr('name', 'new_barcode'+barcode_id).attr('required', true).attr('autofocus', true).attr('max_length', '128')
             .style('text-transform', 'uppercase')
         barcode_input.append('label').attr('class', 'form-control-placeholder text-muted').attr('for', 'new_barcode'+barcode_id).text('Barcode Sequence')
 
-
-        //var or_text = curr_main.append('div').attr('class', 'col-md-1 m-0 p-0')
-        //    .append('div').attr('class', 'lead text-center').html('or')
-/*
-        var barcode_input = curr_main.append('div').attr('class', 'form-group col-md-3')
-        barcode_input.append('input').attr('class', 'form-control').attr('type', 'text').attr('id', 'new_barcode'+barcode_id)
-            .attr('name', 'new_barcode'+barcode_id).attr('required', true).attr('autofocus', true).attr('max_length', '128')
-            .style('text-transform', 'uppercase')
-        barcode_input.append('label').attr('class', 'form-control-placeholder text-muted').attr('for', 'new_barcode'+barcode_id).text('Barcode Sequence')
-
- */
         var sample_input = curr_main.append('div').attr('class', 'form-group col-md-5  mt-2')
-        sample_input.append('input').attr('class', 'form-control').attr('type', 'text').attr('id', 'new_sample'+barcode_id)
+        sample_input.append('input').attr('class', 'form-control barcode_sample_name').attr('type', 'text').attr('id', 'new_sample'+barcode_id)
             .attr('name', 'new_sample'+barcode_id).attr('required', true).attr('autofocus', true).attr('max_length', '128')
         sample_input.append('label').attr('class', 'form-control-placeholder text-muted').attr('for', 'new_sample'+barcode_id).text('Sample Name')
 
