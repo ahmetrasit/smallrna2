@@ -1,81 +1,85 @@
 <div class="modal fade" id="newDatasetModal" tabindex="-1" role="dialog" aria-labelledby="Add New Dataset" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="addDatasetTitle">Add New Dataset</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="newDatasetModalBody">
-        <div class="row d-none" id="fileupload_div">
-          <div class="col-md-12 text-center">
-            <p class="lead">Upload <b>.fastq.gz files</b></p>
-            <div class="input-group mb-3">
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="fileupload" multiple>
-                <label class="custom-file-label" for="fileupload">Choose file(s)</label>
-              </div>
+        <form action="/upload/" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" id="new_dataset_focus" name="new_dataset_focus" value="">
+            <div class="modal-header">
+            <h5 class="modal-title" id="addDatasetTitle">Add New Dataset</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
             </div>
-          </div>
-        </div>
-        <div class="row" id="debarcodingSelection">
-          <div onclick="needsDebarcoding()" class="jumbotron col-md-6 bg-white text-center jumbotron-link text-black-50">
-            <h1 class="display-5">Needs Debarcoding</h1>
-            <p class="lead">Upload FASTQ files</p>
-          </div>
-          <div onclick="noDebarcoding()" class="jumbotron col-md-6 bg-white text-center jumbotron-link text-black-50">
-            <h1 class="display-5">No Need to Debarcode</h1>
-            <p class="lead">Use already debarcoded data / files</p>
-          </div>
-        </div>
-        <div class="row d-none" id="new_dataset_info">
-          <div class="col-md-12">
-            <div class="row">
-              <div class="form-group col-md-4">
-                <input type="text" name="new_dataset_name" id="new_dataset_name" class="form-control" required autofocus maxlength="128">
-                <label class="form-control-placeholder" for="new_dataset_name">Dataset Name</label>
-              </div>
-              <div class="form-group col-md-8">
-                <input name="new_dataset_description" id="new_dataset_description" class="form-control" required/>
-                <label class="form-control-placeholder" for="new_dataset_description">Description</label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row d-none" id="needsDebarcoding">
-            <div class="col-md-12 no-file-uploaded">
-                <div class="bg-danger text-white text-center lead rounded">Please upload .fastq.gz file(s) first.</div>
-            </div>
-            <div class="form-group col-md-12 addBarcodeButton d-none mb-0">
-                <button class="btn form-control text-white bg-success" onclick="addBarcodeInput()"><span class="">Add Barcode</span></button>
-            </div>
-
-            <div class="input-group-sm col-md-12 addBarcodeButton d-none mb-1 mt-0">
-              <div class="input-group-prepend">
-                <div class="input-group-text">
-                  <input type="checkbox" aria-label="Remove adapters?" name="remove_adapter" id="remove_adapter" checked> <span class="pl-2"> Remove Adapter: </span>
+            <div class="modal-body" id="newDatasetModalBody">
+            <div class="row d-none" id="fileupload_div">
+              <div class="col-md-12 text-center">
+                <p class="lead">Upload <b>.fastq.gz files</b></p>
+                <div class="input-group mb-3">
+                  <div class="custom-file">
+                    <input type="file" name="fileupload"  class="custom-file-input" id="fileupload" multiple>
+                    <label class="custom-file-label" for="fileupload">Choose file(s)</label>
+                  </div>
                 </div>
               </div>
-              <input type="text" class="form-control" aria-label="Adapter sequence" id="adapter_sequence" name="adapter_sequence" value="AGATCGGAA" style="text-transform: uppercase">
+            </div>
+            <div class="row" id="debarcodingSelection">
+              <div onclick="needsDebarcoding()" class="jumbotron col-md-6 bg-white text-center jumbotron-link text-black-50">
+                <h1 class="display-5">Needs Debarcoding</h1>
+                <p class="lead">Upload FASTQ files</p>
+              </div>
+              <div onclick="noDebarcoding()" class="jumbotron col-md-6 bg-white text-center jumbotron-link text-black-50">
+                <h1 class="display-5">No Need to Debarcode</h1>
+                <p class="lead">Use already debarcoded data / files</p>
+              </div>
+            </div>
+            <div class="row d-none" id="new_dataset_info">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <input type="text" name="new_dataset_name" id="new_dataset_name" class="form-control" required autofocus maxlength="128">
+                    <label class="form-control-placeholder" for="new_dataset_name">Dataset Name</label>
+                  </div>
+                  <div class="form-group col-md-8">
+                    <input name="new_dataset_description" id="new_dataset_description" class="form-control" required/>
+                    <label class="form-control-placeholder" for="new_dataset_description">Description</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row d-none" id="needsDebarcoding">
+                <div class="col-md-12 no-file-uploaded">
+                    <div class="bg-danger text-white text-center lead rounded">Please upload .fastq.gz file(s) first.</div>
+                </div>
+                <div class="form-group col-md-12 addBarcodeButton d-none mb-0">
+                    <button type="button" class="btn form-control text-white bg-success" onclick="addBarcodeInput()"><span class="">Add Barcode</span></button>
+                </div>
+
+                <div class="input-group-sm col-md-12 addBarcodeButton d-none mb-1 mt-0">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <input type="checkbox" aria-label="Remove adapters?" name="remove_adapter" id="remove_adapter" checked> <span class="pl-2"> Remove Adapter: </span>
+                    </div>
+                  </div>
+                  <input type="text" class="form-control" aria-label="Adapter sequence" id="adapter_sequence" name="adapter_sequence" value="AGATCGGAA" style="text-transform: uppercase">
+                </div>
+
+
+                <div class="col-md-12 barcodeInputs"></div>
             </div>
 
 
-            <div class="col-md-12 barcodeInputs"></div>
-        </div>
-
-
-        <div class="row d-none" id="noDebarcoding">
-            <div class="col-md-12 no-file-uploaded">
-                <div class=" bg-danger text-white text-center lead rounded">Please upload .fastq.gz file(s) first.</div>
+            <div class="row d-none" id="noDebarcoding">
+                <div class="col-md-12 no-file-uploaded">
+                    <div class=" bg-danger text-white text-center lead rounded">Please upload .fastq.gz file(s) first.</div>
+                </div>
             </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="createDataset()" id="createDataset" disabled>Create Dataset</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="createDataset" disabled>Create Dataset</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </form>
     </div>
   </div>
 </div>
@@ -83,11 +87,13 @@
 
 <script>
 
+
   $(':input').bind("change keydown paste input",function() {
     inputsValid()
   });
 
     var emptyFilelist = $('#fileupload').prop('files')
+
   $('#newDatasetModal').on('hidden.bs.modal', function (e) {
       $('#debarcodingSelection').addClass('d-flex')
       $('#needsDebarcoding').removeClass('d-flex').addClass('d-none')
@@ -101,13 +107,16 @@
       $('#fileupload').val('');
       $('.no-file-uploaded').removeClass('d-none').addClass('d-block')
       new_dataset_focus = ''
+      $('#new_dataset_focus').val('')
   })
+
 
   function needsDebarcoding() {
       $('#debarcodingSelection').removeClass('d-flex').addClass('d-none')
       $('#needsDebarcoding').addClass('d-flex')
       $('#new_dataset_info').addClass('d-flex')
       new_dataset_focus = 'needs debarcoding'
+      $('#new_dataset_focus').val('needs debarcoding')
       $('#fileupload_div').addClass('d-flex')
   }
 
@@ -116,37 +125,105 @@
       $('#noDebarcoding').addClass('d-flex')
       $('#new_dataset_info').addClass('d-flex')
       new_dataset_focus = 'no debarcoding'
+      $('#new_dataset_focus').val('no debarcoding')
       $('#fileupload_div').addClass('d-flex')
   }
 
-  function createDataset() {
-    if(inputsValid()){
-        alert('ready to submit')
-    }else{
-        alert('not ready!')
-    }
-  }
+
+
+
+  $(function () {
+      $("#createDataset").fileupload()
+  });
+
+
 
 
   function inputsValid() {
-      var checkFunctions = [
+      //console.log('>', new_dataset_focus)
+      var needsDebarcodingCheckFunctions = [
           checkFileNames,
           checkDatasetName,
           checkDatasetDescription,
           checkAdapter,
           checkBarcodes]
+
+      var noDebarcodingCheckFunctions = [
+          checkFileNames,
+          checkDatasetName,
+          checkDatasetDescription,
+          checkSamples]
       valid = true
-      checkFunctions.forEach(function(currFunction){
-          valid = valid & (currFunction())
-      })
+
+      if (new_dataset_focus == 'needs debarcoding') {
+          //console.log(new_dataset_focus)
+          needsDebarcodingCheckFunctions.forEach(function (currFunction) {
+              valid = valid & (currFunction())
+              //console.log(Boolean(currFunction()))
+          })
+      } else {
+          noDebarcodingCheckFunctions.forEach(function (currFunction) {
+              valid = valid & (currFunction())
+          })
+      }
+
       if(valid){
           $('#createDataset').prop('disabled', false)
       }else{
           $('#createDataset').prop('disabled', true)
       }
-      console.log('input validity checked')
+      //console.log('input validity checked')
+      return valid
   }
 
+
+  function checkSamples() {
+      var names = getAndFixSampleNames()
+      for (let curr of names){
+          if(curr[0].length > 0){
+              //do nothing
+          }else{
+              return false
+          }
+      }
+      return true
+  }
+
+
+  function getAndFixSampleNames(){
+      var names = []
+      var names_lower = []
+      $('.noDebarcoding_sampleName').each(function(){
+          var name = $(this).val().trim()
+          names.push(name)
+          names_lower.push(name.toLowerCase())
+      })
+
+      var duplicate_names = names_lower.reduce(function(acc, el, i, arr) {
+        if (arr.indexOf(el) !== i && acc.indexOf(el) < 0) acc.push(el); return acc;
+      }, []);
+
+      var duplicate_count = {}
+      duplicate_names.forEach(function(curr){
+          duplicate_count[curr] = 1
+      })
+
+      //continue checking duplicates and add _N to the sample names
+      for (var i in names_lower){
+          var curr_name = names_lower[i]
+          if(duplicate_names.includes(curr_name)){
+              names[i] = names[i] + '_' + duplicate_count[curr_name]
+              duplicate_count[curr_name] += 1
+          }
+      }
+
+      i = 0
+      $('.noDebarcoding_sampleName').each(function(){
+          $(this).val(names[i])
+          i++
+      })
+      return names
+  }
 
   function checkDatasetName(){
       return $('#new_dataset_name').val().trim().length > 1
@@ -181,14 +258,20 @@
   function getAndFixBarcodes(){
       var barcode_names = []
       var barcodes = []
+      var barcode_seq = []
       $('.barcodeInput').each(function(){
           var seq = $(this).find('input.barcode_sequence').val().trim().toUpperCase()
           var name = $(this).find('input.barcode_sample_name').val().trim()
           barcodes.push([seq, name])
           barcode_names.push(name)
+          barcode_seq.push(seq)
       })
 
       var duplicate_names = barcode_names.reduce(function(acc, el, i, arr) {
+        if (arr.indexOf(el) !== i && acc.indexOf(el) < 0) acc.push(el); return acc;
+      }, []);
+
+      var duplicate_sequences = barcode_seq.reduce(function(acc, el, i, arr) {
         if (arr.indexOf(el) !== i && acc.indexOf(el) < 0) acc.push(el); return acc;
       }, []);
 
@@ -202,14 +285,20 @@
           var curr_name = barcodes[i][1]
           if(duplicate_names.includes(curr_name)){
               barcodes[i][1] = curr_name + '_' + duplicate_count[curr_name]
-              alert(barcodes[i][1])
               duplicate_count[curr_name] += 1
+          }
+
+          //empty duplicate sequences
+          var curr_seq = barcodes[i][0]
+          if(duplicate_sequences.includes(curr_seq)){
+              barcodes[i][0] = ''
           }
       }
 
       i = 0
       $('.barcodeInput').each(function(){
           $(this).find('input.barcode_sample_name').val(barcodes[i][1])
+          $(this).find('input.barcode_sequence').val(barcodes[i][0])
           i++
       })
       return barcodes
@@ -271,14 +360,16 @@
     function populateNoDebarcodingFileList(filelist) {
         d3.selectAll('.noDebarcodingFile').remove()
 
-        var file_definitions = d3.select('#newDatasetModalBody').selectAll('div.noDebarcodingFile').data(filelist).enter()
+        var file_definitions = d3.select('#newDatasetModalBody').selectAll('div.noDebarcodingFile').data(filelist.sort()).enter()
             .append('div').attr('class', 'form-row noDebarcodingFile row-hover p-1 m-1 rounded align-items-center')
 
         file_definitions.append('div').attr('class', 'form-group-sm col-md-3')
-            .append('input').attr('type', 'text').attr('name', function(d,i){return 'noDebarcoding_sampleName_'+i})
-            .attr('id', function(d,i){return 'noDebarcoding_sampleName_'+i})
-            .attr('class', 'form-control').attr('maxlength' , '32')
-            .attr('placeholder', 'Sample Name')
+            .append('input').on('keydown', inputsValid).on('change', inputsValid).on('input', inputsValid)
+                .attr('type', 'text').attr('name', function(d,i){return 'noDebarcoding_sampleName'})
+                .attr('id', function(d,i){return 'noDebarcoding_sampleName_'+i})
+                .attr('class', 'form-control noDebarcoding_sampleName').attr('maxlength' , '32')
+                .attr('placeholder', 'Sample Name')
+                .attr('value', function(d){return d.replace('.fastq.gz', '')})
         file_definitions.append('div')
             .attr('id', function(d,i){return 'noDebarcoding_fileName_'+i})
             .attr('class', 'form-group-sm col-md-9 font-italic border-bottom')
@@ -288,8 +379,8 @@
 
     function fillBarcodeSeq() {
         var select = document.getElementById(this.id)
-
         document.getElementById(this.id.replace('_select', '')).value = select.options[select.selectedIndex].value
+        inputsValid()
     }
 
   function addBarcodeInput() {
@@ -320,7 +411,7 @@
 
         var barcode_dropdown = curr_main.append('div').attr('class', 'col-md-6 mt-2').append('div').attr('class', 'input-group')
         var barcode_prepend = barcode_dropdown.append('div').attr('class', 'input-group-prepend form-group')
-        barcode_prepend.append('select').on('change', fillBarcodeSeq)
+        barcode_prepend.append('select').on('change', fillBarcodeSeq).on('keydown', inputsValid).on('input', inputsValid)
             .attr('class', 'form-control')
             .attr('id', 'new_barcode_select_'+barcode_id)
             .selectAll('option').data(barcodeList).enter()
@@ -332,14 +423,14 @@
         var barcode_input = barcode_dropdown.append('div').attr('class', 'form-group')
         barcode_input.append('input').on('keydown', inputsValid).on('change', inputsValid).on('input', inputsValid)
             .attr('class', 'form-control barcode_sequence').attr('type', 'text').attr('id', 'new_barcode_'+barcode_id)
-            .attr('name', 'new_barcode'+barcode_id).attr('autofocus', true).attr('max_length', '128')
+            .attr('name', 'new_barcode').attr('autofocus', true).attr('max_length', '128')
             .style('text-transform', 'uppercase')
         barcode_input.append('label').attr('class', 'form-control-placeholder text-muted').attr('for', 'new_barcode'+barcode_id).text('Barcode Sequence')
 
         var sample_input = curr_main.append('div').attr('class', 'form-group col-md-5  mt-2')
         sample_input.append('input').on('keydown', inputsValid).on('change', inputsValid).on('input', inputsValid)
             .attr('class', 'form-control barcode_sample_name').attr('type', 'text').attr('id', 'new_sample'+barcode_id)
-            .attr('name', 'new_sample'+barcode_id).attr('autofocus', true).attr('max_length', '128')
+            .attr('name', 'new_sample').attr('autofocus', true).attr('max_length', '128')
         sample_input.append('label').attr('class', 'form-control-placeholder text-muted').attr('for', 'new_sample'+barcode_id).text('Sample Name')
 
         curr_main.append('div').attr('class', 'form-group col-md-1  mt-2')

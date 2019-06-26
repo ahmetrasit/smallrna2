@@ -8,6 +8,8 @@ from main import forms, models
 from django import forms as django_forms
 
 from django.views.generic.base import View
+from django.urls import reverse_lazy
+from django.http import JsonResponse
 
 
 import logging
@@ -48,6 +50,29 @@ class Home(View):
             context = {'projects': models.Project.objects.filter(owner=request.user)}
         return render(request, "home.html", context=context)
 
+
+class FileUploadView(View):
+    success_url = reverse_lazy('home')
+    template_name = 'home.html'
+
+    def post(self, request, *args, **kwargs):
+        print('post', request.POST.keys())
+        print(request.POST.getlist('noDebarcoding_sampleName'))
+        uploaded = request.FILES.getlist('fileupload')
+        try:
+            print(request.POST['new_dataset_focus'])
+        except:
+            print('>NO type here')
+
+        for i in range(len(uploaded)):
+            file = uploaded[i]
+            filename = str(file)
+            print('>filename\t', filename)
+
+        messages.info(request, 'upload successfull')
+        return redirect('/')
+
+
 class EmailConfirmationView(LoginRequiredMixin, FormView):
     template_name = 'home.html'
     form_class = forms.EmailConfirmationForm
@@ -58,10 +83,8 @@ class EmailConfirmationView(LoginRequiredMixin, FormView):
         confirmation = models.EmailConfirmation.objects.get(user=self.request.user)
         if confirmation.sent_key == sent_key:
             form.update_model(confirmation)
-            #models.UserEvent(user=self.request.user, event='cEM').save()
             messages.success(self.request, 'Your e-mail is confirmed. Why don\'t you start with the tutorials?')
         else:
-            #models.UserEvent(user=self.request.user, event='wEC').save()
             messages.error(self.request, 'Invalid activation code, please check the code and try again!')
         return super().form_valid(form)
 
