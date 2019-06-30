@@ -112,6 +112,11 @@ class Stats(models.Model):
     created_on = models.DateTimeField(auto_now=True)
 
 
-
-
-
+class Task(models.Model):
+    name = models.TextField()
+    task_type = models.CharField(max_length=64, default='processing')
+    status = models.TextField(default='waiting')
+    message = models.TextField(null=True)
+    created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    created_on = models.DateField(auto_now=True)
+    finished_on = models.DateField(null=True)

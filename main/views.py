@@ -10,6 +10,7 @@ from django import forms as django_forms
 from django.views.generic.base import View
 from django.urls import reverse_lazy
 from django.http import JsonResponse
+from .processing import NewProcess
 
 
 import logging
@@ -63,6 +64,11 @@ class FileUploadView(View):
             print(request.POST['new_dataset_focus'])
         except:
             print('>NO type here')
+
+        process = NewProcess(request.POST, request.user)
+        process.new_dataset()
+
+
 
         for i in range(len(uploaded)):
             file = uploaded[i]
