@@ -61,15 +61,6 @@ class ProcessedData(models.Model):
     finished_on = models.DateTimeField(null=True)
 
 
-class Task(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    processed_data = models.ForeignKey(ProcessedData, on_delete=models.DO_NOTHING)
-    status = models.CharField(max_length=32)
-    created_on = models.DateTimeField(auto_now=True)
-    started_on = models.DateTimeField(null=True)
-    finished_on = models.DateTimeField(null=True)
-
-
 class Sample(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField()

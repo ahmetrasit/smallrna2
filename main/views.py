@@ -65,8 +65,9 @@ class FileUploadView(View):
         except:
             print('>NO type here')
 
-        process = NewProcess(request.POST, request.user)
+        process = NewProcess(request.POST, request.user, uploaded)
         process.new_dataset()
+        print('files processed')
 
 
 

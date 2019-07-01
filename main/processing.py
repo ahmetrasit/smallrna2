@@ -8,16 +8,18 @@ import os
 class NewProcess:
     max_active_tasks = 3
 
-    def __init__(self, parameters, user):
+    def __init__(self, parameters, user, files):
         self.user = user
-        self.username = user.username
-        self.parameters = parameters
+        self.username = str(user).split("@")[0]
+        self.parameters = {}
+        for key in parameters:
+            self.parameters[key] = parameters.getlist(key)
+        self.files = files
 
     def new_dataset(self):
         task = self.submit_task()
         try:
             raw_data_folder = self.save_raw_data()
-
             allowed = True
             while not allowed:
                 time.sleep(12)
@@ -31,7 +33,7 @@ class NewProcess:
 
     def submit_task(self):
         task = models.Task(
-            name=slugify(self.parameters['dataset_name']),
+            name=slugify(self.parameters['new_dataset_name']),
             created_by=self.user
          )
         task.save()
@@ -60,35 +62,34 @@ class NewProcess:
 
     def save_raw_data(self):
         folder = self.create_raw_data_folders()
-        print('save_raw_data', folder)
-        for file in self.parameters['files']:
+        for file in self.files:
             filename = str(file)
             with open(folder + '/' + filename, 'wb+') as destination:
                 print('saving', folder + '/' + filename)
                 for chunk in file.chunks():
                     destination.write(chunk)
+        #self.parameters['noDebarcoding_sampleName'] = self.parameters.getlist('noDebarcoding_sampleName')
         with open(folder + '/dataset_annotation.json', 'w') as f:
             json.dump(self.parameters, f)
         return folder
 
     def create_raw_data_folders(self):
-        print(os.getcwd(), os.listdir('./'))
         try:
             print(os.getcwd(), os.listdir('./'))
-            os.makedirs('static/upload/')
-            os.makedirs('static/upload/raw/')
-            os.makedirs('static/upload/raw/' + self.username )
-            os.makedirs('static/upload/raw/' + self.username + '/' + slugify(self.parameters['dataset_name']))
-        except:
-            pass
-        return 'static/upload/raw/' + self.username + '/' + slugify(self.parameters['dataset_name'])
+            #os.makedirs('static/upload/')
+            #os.makedirs('static/upload/raw/')
+            #os.makedirs('static/upload/raw/' + self.username )
+            os.makedirs('static/upload/raw/' + self.username + '/' + slugify(self.parameters['new_dataset_name']))
+        except Exception as e:
+            print('create raw folder:', str(e))
+        return 'static/upload/raw/' + self.username + '/' + slugify(self.parameters['new_dataset_name'])
 
     def create_processed_data_folders(self, keyword):
         print(os.getcwd(), os.listdir('./'))
         try:
             print(os.getcwd(), os.listdir('./'))
-            os.makedirs('static/data/')
-            os.makedirs('static/data/' + self.username)
+            #os.makedirs('static/data/')
+            #os.makedirs('static/data/' + self.username)
             os.makedirs('static/data/' + self.username + '/' + slugify(keyword))
         except:
             pass
