@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
     'django_extensions',
+    #'django_dbconn_retry',
 ]
 
 MIDDLEWARE = [
@@ -80,12 +81,13 @@ WSGI_APPLICATION = 'smallrna.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
+        'CONN_MAX_AGE': 3600,
         'NAME': 'smallrna',
         'USER': 'smallrna',
         'PASSWORD' : 'smallrna!',
-        'HOST' : '127.0.0.1',
-        'PORT' : '5432'
+        'HOST' : 'localhost',
+        'PORT' : ''
 
 
     }

@@ -28,25 +28,20 @@ class NewProcess:
 
     @staticmethod
     def start_background_process(func, param):
-        print('start_background_process')
         pool = multiprocessing.Pool(processes=1)
         pool.apply_async(func, args=(param,))
 
     def task_after_upload(self, raw_data_folder):
-        print('in task_after_upload')
         task = self.submit_task()
         try:
-            print('in try')
-            allowed = True
-            while allowed:
-                print('in while')
+            wait = True
+            while wait:
                 time.sleep(1)
-                allowed = self.check_task_status(task)
-                print('in while', allowed)
-            print('out while')
+                wait = self.check_task_status(task)
 
             next_task = self.determine_next_task()
             processed_data_folder = next_task(raw_data_folder)
+            print(processed_data_folder)
             self.update_task_status(task, 'finished', '')
         except Exception as e:
             print('error', str(e))
@@ -54,7 +49,6 @@ class NewProcess:
             self.update_task_status(task, 'error', str(e))
 
     def submit_task(self):
-        print('submit task', self.user)
         try:
             task = models.Task(
                 name=slugify(self.parameters['new_dataset_name']),
@@ -62,8 +56,8 @@ class NewProcess:
              )
             task.save()
         except Exception as e:
+            print('submit_task exception', str(e))
             traceback.print_exc()
-        print('task saved')
         return task
 
     @staticmethod
@@ -74,20 +68,13 @@ class NewProcess:
         return task
 
     def check_task_status(self, task):
-        print('in task status')
-        print(models.Task.objects.all())
-        print('now filter running')
-        print(models.Task.objects.filter(status='running'))
-        no_of_active_tasks = models.Task.objects.filter(status = 'running')
-        print('no_of_active_tasks', no_of_active_tasks)
+        no_of_active_tasks = len(models.Task.objects.filter(status = 'running'))
         if no_of_active_tasks <= self.max_active_tasks:
             if task.id == models.Task.objects.filter(status = 'waiting').first().id:
                 task.status = 'running'
                 task.save()
-                print('no_of_active_tasks', True)
-                return True
-        print('no_of_active_tasks', False)
-        return False
+                return False
+        return True
 
     def determine_next_task(self):
         print('determine_next_task', self.parameters['new_dataset_focus'])
@@ -111,7 +98,7 @@ class NewProcess:
 
     def create_raw_data_folders(self):
         try:
-            print(os.getcwd(), os.listdir('./'))
+            #print(os.getcwd(), os.listdir('./'))
             #os.makedirs('static/upload/')
             #os.makedirs('static/upload/raw/')
             #os.makedirs('static/upload/raw/' + self.username )
@@ -121,9 +108,9 @@ class NewProcess:
         return 'static/upload/raw/' + self.username + '/' + slugify(self.parameters['new_dataset_name'])
 
     def create_processed_data_folders(self, keyword):
-        print(os.getcwd(), os.listdir('./'))
+        #print(os.getcwd(), os.listdir('./'))
         try:
-            print(os.getcwd(), os.listdir('./'))
+            #print(os.getcwd(), os.listdir('./'))
             #os.makedirs('static/data/')
             #os.makedirs('static/data/' + self.username)
             os.makedirs('static/data/' + self.username + '/' + slugify(keyword))
