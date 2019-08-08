@@ -1,12 +1,15 @@
+import traceback
+
 from . import models
 import time
 from django.utils.text import slugify
 import json
 import os
+import multiprocessing
 
 
 class NewProcess:
-    max_active_tasks = 3
+    max_active_tasks = 5
 
     def __init__(self, parameters, user, files):
         self.user = user
@@ -17,40 +20,73 @@ class NewProcess:
         self.files = files
 
     def new_dataset(self):
-        task = self.submit_task()
         try:
             raw_data_folder = self.save_raw_data()
+            self.start_background_process(self.task_after_upload, raw_data_folder)
+        except Exception as e:
+            print('error saving files:', str(e))
+
+    @staticmethod
+    def start_background_process(func, param):
+        print('start_background_process')
+        pool = multiprocessing.Pool(processes=1)
+        pool.apply_async(func, args=(param,))
+
+    def task_after_upload(self, raw_data_folder):
+        print('in task_after_upload')
+        task = self.submit_task()
+        try:
+            print('in try')
             allowed = True
-            while not allowed:
-                time.sleep(12)
+            while allowed:
+                print('in while')
+                time.sleep(1)
                 allowed = self.check_task_status(task)
+                print('in while', allowed)
+            print('out while')
 
             next_task = self.determine_next_task()
             processed_data_folder = next_task(raw_data_folder)
             self.update_task_status(task, 'finished', '')
         except Exception as e:
+            print('error', str(e))
+            traceback.print_exc()
             self.update_task_status(task, 'error', str(e))
 
     def submit_task(self):
-        task = models.Task(
-            name=slugify(self.parameters['new_dataset_name']),
-            created_by=self.user
-         )
-        task.save()
+        print('submit task', self.user)
+        try:
+            task = models.Task(
+                name=slugify(self.parameters['new_dataset_name']),
+                created_by=self.user
+             )
+            task.save()
+        except Exception as e:
+            traceback.print_exc()
+        print('task saved')
         return task
 
-    def update_task_status(self, task, status, message):
+    @staticmethod
+    def update_task_status(task, status, message):
         task.status = status
         task.message = message
         task.save()
         return task
 
     def check_task_status(self, task):
-        no_of_active_tasks = models.Task.objects.filter('status'=='running')
+        print('in task status')
+        print(models.Task.objects.all())
+        print('now filter running')
+        print(models.Task.objects.filter(status='running'))
+        no_of_active_tasks = models.Task.objects.filter(status = 'running')
+        print('no_of_active_tasks', no_of_active_tasks)
         if no_of_active_tasks <= self.max_active_tasks:
-            if task.id == models.Task.objects.filter('status' == 'waiting').first().id:
+            if task.id == models.Task.objects.filter(status = 'waiting').first().id:
                 task.status = 'running'
+                task.save()
+                print('no_of_active_tasks', True)
                 return True
+        print('no_of_active_tasks', False)
         return False
 
     def determine_next_task(self):

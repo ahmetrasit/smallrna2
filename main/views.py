@@ -70,7 +70,6 @@ class FileUploadView(View):
         print('files processed')
 
 
-
         for i in range(len(uploaded)):
             file = uploaded[i]
             filename = str(file)

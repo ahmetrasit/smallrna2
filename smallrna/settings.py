@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'smallrna.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'smallrna2',
+        'NAME': 'smallrna',
         'USER': 'smallrna',
         'PASSWORD' : 'smallrna!',
         'HOST' : '127.0.0.1',
