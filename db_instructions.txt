@@ -1,0 +1,7 @@
+brew install mysql
+pip install mysqlclient
+mysql -u root
+CREATE DATABASE smallrna CHARACTER SET UTF8;
+CREATE USER smallrna@localhost IDENTIFIED BY 'smallrna!';
+GRANT ALL PRIVILEGES ON smallrna.* TO smallrna@localhost;
+FLUSH PRIVILEGES;
