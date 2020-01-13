@@ -7,11 +7,16 @@ import json
 import os
 import multiprocessing
 import subprocess
+import gzip
 
 
 class NewProcess:
     max_active_tasks = 5
     max_cpu = 20
+    pairs = {'AGNCT'[i]: 'AGNCT'[4 - i] for i in range(5)}
+
+    def revComp(self, seq):
+        return ''.join([self.pairs[nt] for nt in seq][::-1])
 
     def __init__(self, parameters, user, files):
         self.user = user
@@ -24,17 +29,20 @@ class NewProcess:
     def new_dataset(self):
         try:
             raw_data_folder = self.save_raw_data()
-            self.start_background_process(self.task_after_upload, raw_data_folder, 1)
+            self.start_background_process(self.task_after_upload, raw_data_folder, 5)
         except Exception as e:
             print('error saving files:', str(e))
 
     @staticmethod
     def start_background_process(func, param, n):
-        print('start_background_process')
-        pool = multiprocessing.Pool(processes=n)
-        print('start_background_process2')
-        pool.apply_async(func, args=(param,))
-        print('start_background_process3')
+        try:
+            print('start_background_process')
+            pool = multiprocessing.Pool(processes=n)
+            print('start_background_process2')
+            pool.apply_async(func, args=(param,))
+            print('start_background_process3')
+        except Exception as e:
+            print('something wrong with the sbp')
 
     def task_after_upload(self, raw_data_folder):
         print('task_after_upload')
@@ -122,8 +130,61 @@ class NewProcess:
     def create_counts_fa(self, raw_data_folder):
         folder = self.create_processed_data_folders('counts_fa')
         for file in [file for file in os.listdir(raw_data_folder) if file.endswith('.fastq.gz')]:
-            pass
-        return folder
+            with gzip.open(file, 'rt') as f:
+                read = []
+                for line in f:
+                    line_number += 1
+                    read.append(line)
+                    if line_number % 4 == 0:
+                        sample, seq, reverse = processRead(read)
+                        if seq:
+                            sample2reads[sample].append(seq)
+                            reverse_barcode_count += reverse
+                        elif sample:
+                            try:
+                                rest_barcodes[sample] += 1
+                            except:
+                                rest_barcodes[sample] = 1
+                        else:
+                            error_count += 1
+
+            umi_len = int(parameters['umi_length']) if 'has_umi' in parameters else 0
+
+            print('create counts.fa and all.fa')
+            sample2raw_read_counts = {}
+            for sample in parameters['new_sample']:
+                print('>sample', sample)
+                read_counts = {}
+                if umi_len:
+                    for read in set([read for read in sample2reads[sample]]):
+                        try:
+                            read_counts[read[umi_len:]] += 1
+                        except:
+                            read_counts[read[umi_len:]] = 1
+                else:
+                    for read in sample2reads[sample]:
+                        try:
+                            read_counts[read] += 1
+                        except:
+                            read_counts[read] = 1
+                sample2raw_read_counts[sample] = sum([read_counts[curr] for curr in read_counts])
+
+                with open('__sample__{}.counts.fa'.format(sample), 'w') as f:
+                    f.write('\n'.join(['>{}:{}\n{}'.format(seq, read_counts[seq], seq) for seq in read_counts]))
+
+                all_fa = []
+                for seq in read_counts:
+                    for i in range(read_counts[seq]):
+                        all_fa.append('>{}_{}\n{}'.format(seq, i + 1, seq))
+
+                with open('__sample__{}.all.fa'.format(sample), 'w') as f:
+                    f.write('\n'.join(all_fa))
+
+            return {'read_counts': sample2raw_read_counts, 'reverse_barcodes': reverse_barcode_count,
+                    'other_barcodes': {curr for curr in rest_barcodes if rest_barcodes[curr] > 100000},
+                    'read_errors': error_count}
+
+        return True
 
     def debarcode_and_counts_fa(self, raw_data_folder):
         files = [file for file in os.listdir(raw_data_folder) if file.endswith('fastq.gz')]
@@ -132,28 +193,135 @@ class NewProcess:
         os.makedirs(raw_data_folder + '/' + 'temp')
         curr_directory = os.getcwd()
         os.chdir(raw_data_folder)
-        print(curr_directory, os.chdir(raw_data_folder))
+        print(curr_directory, os.getcwd())
+
 
         #merge files
-        cat_cmd = subprocess.Popen(' '.join(['ls;', 'cat', ' '.join(files), '>', './temp/merged.fastq.gz']), shell=True)
+        cat_cmd = subprocess.Popen(' '.join(['ls; echo hey;', 'cat', ' '.join(files), '>', './temp/merged.fastq.gz']), shell=True)
         cat_cmd.wait()
 
         print('files merged')
 
         #remove adapter
-        if self.parameters['remove_adapter'][0] == 'on':
-            adapter = self.parameters['adapter_sequence'][0]
-            cutadapt_cmd = subprocess.Popen(' '.join(['cutadapt', '-a', adapter, '-j', self.max_cpu, '-o', './temp/trimmed.fastq.gz', './temp/merged.fastq.gz', '; mv', './temp/trimmed.fastq.gz', './temp/merged.fastq.gz']), shell=True)
+        print('parameters', self.parameters)
+        if 'remove_adapter' in self.parameters:
+            adapter = self.parameters['adapter_sequence'][0].strip()
+            bash_command = ' '.join(['cutadapt', '-a', adapter, '-j', str(self.max_cpu), '-o', './temp/trimmed.fastq.gz', './temp/merged.fastq.gz', '; mv', './temp/trimmed.fastq.gz', './temp/merged.fastq.gz'])
+            cutadapt_cmd = subprocess.Popen(bash_command, shell=True, stdout=subprocess.PIPE)
+            stdout = cutadapt_cmd.communicate()
+            with open('cutadapt_report.txt', 'w') as f:
+                f.write(str(stdout[0]))
             cutadapt_cmd.wait()
-        print('adapters removed')
+            print('adapters removed')
 
+        try:
+            debarcode_summary = self.debarcodeFile('./temp/merged.fastq.gz', self.parameters)
+            print(debarcode_summary)
+        except Exception as e:
+            print('problem:', e)
+
+        #folder = self.create_processed_data_folders('counts_fa')
+
+        return True
+
+    def debarcodeFile(self, file, parameters):
+
+        def processRead(self, read, barcode2sample, rev_barcode2sample):
+            header, seq, plus, _ = read
+            if plus == '+':
+                barcode = line.strip().split(':')[-1]
+                if barcode in barcode2sample:
+                    return barcode2sample[barcode], seq, 0
+                elif barcode in rev_barcode2sample:
+                    return rev_barcode2sample[barcode], seq, 1
+                else:
+                    return barcode, None, 0
+            else:
+                return None, None, None
+
+
+
+        barcode2sample_template = {bar : sam for bar, sam in zip(parameters['new_barcode'], parameters['new_sample'])}
+        barcode2sample = {}
+        rev_barcode2sample = {}
+        for seq in barcode2sample_template:
+            barcode2sample[seq] = barcode2sample_template[seq]
+            barcode2sample[seq[2:]] = barcode2sample_template[seq]
+            barcode2sample[seq[:-2]] = barcode2sample_template[seq]
+            rev_barcode2sample[self.revComp(seq)] = barcode2sample_template[seq]
+            rev_barcode2sample[self.revComp(seq[2:])] = barcode2sample_template[seq]
+            rev_barcode2sample[self.revComp(seq[:-2])] = barcode2sample_template[seq]
+
+        sample2reads = {sample:[] for sample in parameters['new_sample']}
+        rest_barcodes = {}
+        error_count = 0
+        line_number = 0
+        reverse_barcode_count = 0
+
+        print('reading merged file')
+        with gzip.open(file, 'rt') as f:
+            read = []
+            for line in f:
+                line_number += 1
+                read.append(line)
+                if line_number % 4 == 0:
+                    sample, seq, reverse = processRead(read)
+                    if seq:
+                        sample2reads[sample].append(seq)
+                        reverse_barcode_count += reverse
+                    elif sample:
+                        try:
+                            rest_barcodes[sample] += 1
+                        except:
+                            rest_barcodes[sample] = 1
+                    else:
+                        error_count += 1
+
+        umi_len = int(parameters['umi_length']) if 'has_umi' in parameters else 0
+
+        print('create counts.fa and all.fa')
+        sample2raw_read_counts = {}
+        for sample in parameters['new_sample']:
+            print('>sample', sample)
+            read_counts = {}
+            if umi_len:
+                for read in set([read for read in sample2reads[sample]]):
+                    try:
+                        read_counts[read[umi_len:]] += 1
+                    except:
+                        read_counts[read[umi_len:]] = 1
+            else:
+                for read in sample2reads[sample]:
+                    try:
+                        read_counts[read] += 1
+                    except:
+                        read_counts[read] = 1
+            sample2raw_read_counts[sample] = sum([read_counts[curr] for curr in read_counts ])
+
+            with open('__sample__{}.counts.fa'.format(sample), 'w') as f:
+                f.write('\n'.join(['>{}:{}\n{}'.format(seq, read_counts[seq], seq) for seq in read_counts]))
+
+            all_fa = []
+            for seq in read_counts:
+                for i in range(read_counts[seq]):
+                    all_fa.append('>{}_{}\n{}'.format(seq, i+1, seq))
+
+            with open('__sample__{}.all.fa'.format(sample), 'w') as f:
+                f.write('\n'.join(all_fa))
+
+        return {'read_counts':sample2raw_read_counts, 'reverse_barcodes':reverse_barcode_count, 'other_barcodes':{curr for curr in rest_barcodes if rest_barcodes[curr] > 100000}, 'read_errors':error_count}
+
+
+
+
+        '''
         #split file into smaller chunks, preparing for parallel debarcoding
-        split_cmd = subprocess.Popen(''.join(['split -l 200000', './temp/merged.fastq.gz', 'chunk']))
+        split_cmd = subprocess.Popen(''.join(['split -l 200000 ', './temp/merged.fastq.gz', 'chunk']), shell=True)
         split_cmd.wait()
         split_files = [file for file in os.listdir('./temp') if file.startswith('chunk')]
         print('split_files', split_files)
 
-        '''
+
         #start parallel debarcoding
         m = multiprocessing.Manager()
         start_q = m.Queue()
@@ -171,15 +339,3 @@ class NewProcess:
             time.sleep(2)
 
         '''
-        #merge files with the same adapter sequence and feed counts_fa
-        os.chdir(curr_directory)
-        folder = self.create_processed_data_folders('counts_fa')
-        #create counts.fa files
-        #remove split files
-        return folder
-
-    def debarcodeFile(self, params):
-        file, start_q, end_q = params
-        start_q.put(file)
-        print('>dF>', file)
-        end_q.put(file)
