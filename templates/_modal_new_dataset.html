@@ -65,10 +65,10 @@
                 <div class="input-group-sm col-md-6 addBarcodeButton d-none mb-0 mt-0">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
-                      <input type="checkbox" aria-label="UMI?" name="has_umi" id="has_umi"> <span class="pl-2"> Has 5' UMI: </span>
+                      <input type="checkbox" aria-label="UMI?" name="has_umi_needsDebarcoding" id="has_umi_needsDebarcoding"> <span class="pl-2"> Has 5' UMI: </span>
                     </div>
                   </div>
-                    <select class="form-control umi_length" aria-label="has UMI" id="umi_length" name="umi_length"></select>
+                    <select class="form-control umi_length" aria-label="has UMI" id="umi_length_needsDebarcoding" name="umi_length_needsDebarcoding"></select>
                 </div>
 
                 <div class="form-group col-md-12 addBarcodeButton d-none mb-3">
@@ -96,10 +96,10 @@
                 <div class="input-group-sm col-md-6 addBarcodeButton d-none mb-0 mt-0">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
-                      <input type="checkbox" aria-label="UMI?" name="has_umi" id="has_umi"> <span class="pl-2"> Has 5' UMI: </span>
+                      <input type="checkbox" aria-label="UMI?" name="has_umi_noDebarcoding" id="has_umi_noDebarcoding"> <span class="pl-2"> Has 5' UMI: </span>
                     </div>
                   </div>
-                    <select class="form-control umi_length" aria-label="has UMI" id="umi_length" name="umi_length"></select>
+                    <select class="form-control umi_length" aria-label="has UMI" id="umi_length_noDebarcoding" name="umi_length_noDebarcoding"></select>
                 </div>
 
             </div>
@@ -157,6 +157,7 @@
       new_dataset_focus = 'no debarcoding'
       $('#new_dataset_focus').val('no debarcoding')
       $('#fileupload_div').addClass('d-flex')
+      populateUMILengthDropdown()
   }
 
 
@@ -398,8 +399,13 @@
 
     function populateNoDebarcodingFileList(filelist) {
         d3.selectAll('.noDebarcodingFile').remove()
+        d3.selectAll('.noDebarcodingFileHeader').remove()
 
-        var file_definitions = d3.select('#newDatasetModalBody').selectAll('div.noDebarcodingFile').data(filelist).enter()
+        const header = d3.select('#newDatasetModalBody').append('div').attr('class', 'form-row noDebarcodingFileHeader p-1 m-1 mt-3 rounded align-items-center')
+        header.append('div').attr('class', 'form-group-sm col-md-3').html('Sample Name')
+        header.append('div').attr('class', 'form-group-sm col-md-9 font-italic border-bottom').html('File Name')
+
+        const file_definitions = d3.select('#newDatasetModalBody').selectAll('div.noDebarcodingFile').data(filelist).enter()
             .append('div').attr('class', 'form-row noDebarcodingFile row-hover p-1 m-1 rounded align-items-center')
 
         file_definitions.append('div').attr('class', 'form-group-sm col-md-3')
