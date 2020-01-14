@@ -68,7 +68,7 @@
                       <input type="checkbox" aria-label="UMI?" name="has_umi" id="has_umi"> <span class="pl-2"> Has 5' UMI: </span>
                     </div>
                   </div>
-                    <select class="form-control" aria-label="has UMI" id="umi_length" name="umi_length"></select>
+                    <select class="form-control umi_length" aria-label="has UMI" id="umi_length" name="umi_length"></select>
                 </div>
 
                 <div class="form-group col-md-12 addBarcodeButton d-none mb-3">
@@ -83,6 +83,25 @@
                 <div class="col-md-12 no-file-uploaded">
                     <div class=" bg-danger text-white text-center lead rounded">Please upload .fastq.gz file(s) first.</div>
                 </div>
+
+                <div class="input-group-sm col-md-6 addBarcodeButton d-none mb-0 mt-0">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <input type="checkbox" aria-label="Remove adapters?" name="remove_adapter" id="remove_adapter" checked> <span class="pl-2"> Remove Adapter: </span>
+                    </div>
+                  </div>
+                  <input type="text" class="form-control" aria-label="Adapter sequence" id="adapter_sequence" name="adapter_sequence" value="AGATCGGAA" style="text-transform: uppercase">
+                </div>
+
+                <div class="input-group-sm col-md-6 addBarcodeButton d-none mb-0 mt-0">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <input type="checkbox" aria-label="UMI?" name="has_umi" id="has_umi"> <span class="pl-2"> Has 5' UMI: </span>
+                    </div>
+                  </div>
+                    <select class="form-control umi_length" aria-label="has UMI" id="umi_length" name="umi_length"></select>
+                </div>
+
             </div>
             </div>
             <div class="modal-footer">
@@ -152,7 +171,7 @@
   function populateUMILengthDropdown(){
       const cut_size = [...Array(17).keys()].filter(x => x > 3);
 
-      d3.select('#umi_length').selectAll('option').data(cut_size).enter()
+      d3.selectAll('.umi_length').selectAll('option').data(cut_size).enter()
         .append('option')
           .text( function(d){return d + ' nucleotides-long' })
           .attr('value', function(d){return d})
@@ -380,7 +399,7 @@
     function populateNoDebarcodingFileList(filelist) {
         d3.selectAll('.noDebarcodingFile').remove()
 
-        var file_definitions = d3.select('#newDatasetModalBody').selectAll('div.noDebarcodingFile').data(filelist.sort()).enter()
+        var file_definitions = d3.select('#newDatasetModalBody').selectAll('div.noDebarcodingFile').data(filelist).enter()
             .append('div').attr('class', 'form-row noDebarcodingFile row-hover p-1 m-1 rounded align-items-center')
 
         file_definitions.append('div').attr('class', 'form-group-sm col-md-3')

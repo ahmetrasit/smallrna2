@@ -30,3 +30,7 @@ div.jumbotron-link:hover {
 .row-hover:hover  {
     background-color: gainsboro !important;
 }
+
+.adapter_umi {
+    background-color: #cce5ff !important;
+}
