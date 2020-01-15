@@ -112,7 +112,7 @@ class NewProcess:
                     destination.write(chunk)
         #self.parameters['noDebarcoding_sampleName'] = self.parameters.getlist('noDebarcoding_sampleName')
         with open(folder + '/dataset_annotation.json', 'w') as f:
-            json.dump(self.parameters, f)
+            json.dump(self.parameters,f , indent=4)
         return folder
 
     def create_raw_data_folders(self):
@@ -134,7 +134,6 @@ class NewProcess:
 
         curr_directory = os.getcwd()
         os.chdir(raw_data_folder)
-        print('CD>', curr_directory, os.getcwd())
 
         sample_names = self.parameters['noDebarcoding_sampleName']
         file_names = self.parameters['uploaded_file_names']
@@ -160,7 +159,6 @@ class NewProcess:
                      '; mv', '{}.trimmed.fastq.gz'.format(file), '{}'.format(file)])
                 cutadapt_cmd = subprocess.Popen(bash_command, shell=True, stdout=subprocess.PIPE)
                 stdout = str(cutadapt_cmd.communicate()[0], 'utf-8').split('\n')
-                print('Cutadapt>', file, len(stdout))
                 with open('{}.cutadapt_report'.format(file), 'w') as f:
                     f.write('\n'.join(stdout))
                 cutadapt_cmd.wait()
@@ -170,7 +168,6 @@ class NewProcess:
         sample2raw_read_counts = {}
         umi_len = int(self.parameters['umi_length_noDebarcoding'][0]) if 'has_umi_noDebarcoding' in self.parameters else 0
         for file in renamed_filenames:
-            print('F>', file)
             with gzip.open('{}'.format(file), 'rt') as f:
                 read_counts = {}
                 seq_list = []
@@ -216,7 +213,7 @@ class NewProcess:
         files = [file for file in os.listdir(raw_data_folder) if file.endswith('fastq.gz')]
         print(files)
 
-        #os.makedirs(raw_data_folder + '/' + 'temp')
+        os.makedirs(raw_data_folder + '/' + 'temp')
         curr_directory = os.getcwd()
         os.chdir(raw_data_folder)
         print(curr_directory, os.getcwd())
@@ -234,9 +231,9 @@ class NewProcess:
             adapter = self.parameters['adapter_sequence'][0].strip()
             bash_command = ' '.join(['cutadapt', '-a', adapter, '-j', str(self.max_cpu), '-o', './temp/trimmed.fastq.gz', './temp/merged.fastq.gz', '; mv', './temp/trimmed.fastq.gz', './temp/merged.fastq.gz'])
             cutadapt_cmd = subprocess.Popen(bash_command, shell=True, stdout=subprocess.PIPE)
-            stdout = cutadapt_cmd.communicate()
+            stdout = str(cutadapt_cmd.communicate()[0], 'utf-8').split('\n')
             with open('cutadapt_report.txt', 'w') as f:
-                f.write(str(stdout[0]))
+                f.write('\n'.join(stdout))
             cutadapt_cmd.wait()
             print('adapters removed')
 
@@ -253,7 +250,7 @@ class NewProcess:
     def processRead(self, read, barcode2sample, rev_barcode2sample):
         header, seq, plus, _ = read
         if plus == '+':
-            barcode = line.strip().split(':')[-1]
+            barcode = header.split(':')[-1]
             if barcode in barcode2sample:
                 return barcode2sample[barcode], seq.strip(), 0
             elif barcode in rev_barcode2sample:
@@ -274,6 +271,7 @@ class NewProcess:
             rev_barcode2sample[self.revComp(seq)] = barcode2sample_template[seq]
             rev_barcode2sample[self.revComp(seq[2:])] = barcode2sample_template[seq]
             rev_barcode2sample[self.revComp(seq[:-2])] = barcode2sample_template[seq]
+        print(barcode2sample, rev_barcode2sample)
 
         sample2reads = {sample:[] for sample in parameters['new_sample']}
         rest_barcodes = {}
@@ -286,7 +284,7 @@ class NewProcess:
             read = []
             for line in f:
                 line_number += 1
-                read.append(line)
+                read.append(line.strip())
                 if line_number % 4 == 0:
                     sample, seq, reverse = self.processRead(read, barcode2sample, rev_barcode2sample)
                     read = []
@@ -301,7 +299,7 @@ class NewProcess:
                     else:
                         error_count += 1
 
-        umi_len = int(parameters['umi_length_needsDebarcoding']) if 'has_umi_needsDebarcoding' in parameters else 0
+        umi_len = int(parameters['umi_length_needsDebarcoding'][0]) if 'has_umi_needsDebarcoding' in parameters else 0
 
         print('create counts.fa and all.fa')
         sample2raw_read_counts = {}
@@ -320,9 +318,10 @@ class NewProcess:
                         read_counts[read] += 1
                     except:
                         read_counts[read] = 1
-            sample2raw_read_counts[sample] = sum([read_counts[curr] for curr in read_counts ])
 
-            with open('__sample__{}.counts.fa'.format(sample), 'w') as f:
+            sample2raw_read_counts[sample] = sum([read_counts[curr] for curr in read_counts])
+
+            with open('x__sample__{}.counts.fa'.format(sample), 'w') as f:
                 f.write('\n'.join(['>{}:{}\n{}'.format(seq, read_counts[seq], seq) for seq in read_counts]))
 
             all_fa = []
@@ -330,7 +329,7 @@ class NewProcess:
                 for i in range(read_counts[seq]):
                     all_fa.append('>{}_{}\n{}'.format(seq, i+1, seq))
 
-            with open('__sample__{}.all.fa'.format(sample), 'w') as f:
+            with open('x__sample__{}.all.fa'.format(sample), 'w') as f:
                 f.write('\n'.join(all_fa))
 
         return {'read_counts':sample2raw_read_counts, 'reverse_barcodes':reverse_barcode_count, 'other_barcodes':{curr for curr in rest_barcodes if rest_barcodes[curr] > 100000}, 'read_errors':error_count}
