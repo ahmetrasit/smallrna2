@@ -13,6 +13,7 @@ import gzip
 class NewProcess:
     max_active_tasks = 5
     max_cpu = 20
+    ref_folder = '../../../../reference/'
     pairs = {'AGNCT'[i]: 'AGNCT'[4 - i] for i in range(5)}
 
     def revComp(self, seq):
@@ -57,12 +58,48 @@ class NewProcess:
                 print('in while')
             next_task = self.determine_next_task()
             processed_data_folder = next_task(raw_data_folder)
+            print('>Aligning data')
+            self.align_samples(processed_data_folder)
+            print('>Prepare for JBrowse')
+            self.prepare_for_JBrowse(processed_data_folder)
             print(processed_data_folder)
             self.update_task_status(task, 'finished', '')
         except Exception as e:
             print('error', str(e))
             traceback.print_exc()
             self.update_task_status(task, 'error', str(e))
+
+    def align_samples(self, folder):
+        self.align2(folder, 'all.fa', 'genome')
+        self.align2(folder, 'counts.fa', 'genome')
+        self.align2(folder, 'counts.fa', 'metagenes')
+        self.align2(folder, 'counts.fa', 'structural')
+
+    def align2(self, folder, file_type, reference):
+        reference2index = {'genome':'ws270hisat2', 'metagenes':'ws268metagenome', 'structural':'ws268struc_metagenome'}
+        print(file_type, reference)
+        curr_directory = os.getcwd()
+        print(curr_directory)
+        #os.chdir(folder)
+        if file_type == 'counts.fa':
+            bash_command = ' '.join(['for sample in sample___*{};'.format(file_type),
+                                     'do echo $sample; hisat2 --dta-cufflinks -f -a -p {} -x {}{} -U $sample -S $sample.{}.sam;'.format(self.max_cpu, self.ref_folder, reference2index[reference], reference),
+                                     'done'])
+        else:
+            bash_command = ' '.join(['for sample in sample___*{};'.format(file_type),
+                                'do echo $sample; hisat2 --dta-cufflinks -f -a -p {} -x {}{} -U $sample -S $sample.{}.sam;'.format(self.max_cpu, self.ref_folder, reference2index[reference], reference),
+                                'cat $sample.{}.sam | samtools view -@ {} -Shub - | samtools sort -@ {} - -o $sample.{}.bam; samtools index $sample.{}.bam;'.format(reference, self.max_cpu, self.max_cpu, reference, reference),
+                                'dep =$(samtools view -c -F 260 $sample.{}.bam; ratio =$(echo "scale=3; 1000000/$dep" | bc)'.format(reference),
+                                'genomeCoverageBed -split -bg -scale $ratio -g {}ws270.sizes.genome -ibam $sample.{}.bam > $sample.{}.bedgraph;'.format(self.ref_folder, reference, reference),
+                                '{}ucsc-tools/wigToBigWig -clip $sample.{}.bedgraph {}ws270.sizes.genome $sample.{}.bw;'.format(self.ref_folder, reference, self.ref_folder, reference),
+                                'done'])
+        print('H2>', bash_command)
+        hisat2_cmd = subprocess.Popen(bash_command, shell=True)
+        hisat2_cmd.wait()
+
+
+    def prepare_for_JBrowse(self, folder):
+        pass
 
     def submit_task(self):
         try:
@@ -141,20 +178,20 @@ class NewProcess:
         for file, sample in list(zip(file_names, sample_names)):
             print(file, sample)
             try:
-                rename_files_cmd = subprocess.Popen('mv {} __sample__{}.fastq.gz'.format(file, sample), shell=True)
-                file2sample['__sample__{}.fastq.gz'.format(sample)] = sample
+                rename_files_cmd = subprocess.Popen('mv {} sample___{}.fastq.gz'.format(file, sample), shell=True)
+                file2sample['sample___{}.fastq.gz'.format(sample)] = sample
                 rename_files_cmd.wait()
             except Exception as e:
                 print('!Error renaming files', e)
 
-        renamed_filenames = [file for file in os.listdir('./') if file.startswith('__sample__') and file.endswith('fastq.gz')]
+        renamed_filenames = [file for file in os.listdir('./') if file.startswith('sample___') and file.endswith('fastq.gz')]
 
         # remove adapter
         if 'remove_adapter' in self.parameters:
             adapter = self.parameters['adapter_sequence'][0].strip()
             for file in renamed_filenames:
                 bash_command = ' '.join(
-                    ['cutadapt', '-a', adapter, '-j', str(self.max_cpu), '-o', '{}.trimmed.fastq.gz'.format(file),
+                    ['cutadapt -m 10', '-a', adapter, '-j', str(self.max_cpu), '-o', '{}.trimmed.fastq.gz'.format(file),
                      '{}'.format(file),
                      '; mv', '{}.trimmed.fastq.gz'.format(file), '{}'.format(file)])
                 cutadapt_cmd = subprocess.Popen(bash_command, shell=True, stdout=subprocess.PIPE)
@@ -196,7 +233,7 @@ class NewProcess:
 
                 sample2raw_read_counts[file2sample[file]] = sum([read_counts[curr] for curr in read_counts])
 
-                with open('__sample__{}.counts.fa'.format(file2sample[file]), 'w') as f:
+                with open('sample___{}.counts.fa'.format(file2sample[file]), 'w') as f:
                     f.write('\n'.join(['>{}:{}\n{}'.format(seq, read_counts[seq], seq) for seq in read_counts]))
 
                 all_fa = []
@@ -204,10 +241,12 @@ class NewProcess:
                     for i in range(read_counts[seq]):
                         all_fa.append('>{}_{}\n{}'.format(seq, i + 1, seq))
 
-                with open('__sample__{}.all.fa'.format(file2sample[file]), 'w') as f:
+                with open('sample___{}.all.fa'.format(file2sample[file]), 'w') as f:
                     f.write('\n'.join(all_fa))
 
-        return {'read_counts': sample2raw_read_counts}
+        print({'read_counts': sample2raw_read_counts})
+        return raw_data_folder
+
 
     def debarcode_and_counts_fa(self, raw_data_folder):
         files = [file for file in os.listdir(raw_data_folder) if file.endswith('fastq.gz')]
@@ -217,7 +256,6 @@ class NewProcess:
         curr_directory = os.getcwd()
         os.chdir(raw_data_folder)
         print(curr_directory, os.getcwd())
-
 
         #merge files
         cat_cmd = subprocess.Popen(' '.join(['ls; echo hey;', 'cat', ' '.join(files), '>', './temp/merged.fastq.gz']), shell=True)
@@ -229,7 +267,7 @@ class NewProcess:
         print('parameters', self.parameters)
         if 'remove_adapter' in self.parameters:
             adapter = self.parameters['adapter_sequence'][0].strip()
-            bash_command = ' '.join(['cutadapt', '-a', adapter, '-j', str(self.max_cpu), '-o', './temp/trimmed.fastq.gz', './temp/merged.fastq.gz', '; mv', './temp/trimmed.fastq.gz', './temp/merged.fastq.gz'])
+            bash_command = ' '.join(['cutadapt -m 10', '-a', adapter, '-j', str(self.max_cpu), '-o', './temp/trimmed.fastq.gz', './temp/merged.fastq.gz', '; mv', './temp/trimmed.fastq.gz', './temp/merged.fastq.gz'])
             cutadapt_cmd = subprocess.Popen(bash_command, shell=True, stdout=subprocess.PIPE)
             stdout = str(cutadapt_cmd.communicate()[0], 'utf-8').split('\n')
             with open('cutadapt_report.txt', 'w') as f:
@@ -244,8 +282,7 @@ class NewProcess:
             print('problem:', e)
 
         #folder = self.create_processed_data_folders('counts_fa')
-
-        return True
+        return raw_data_folder
 
     def processRead(self, read, barcode2sample, rev_barcode2sample):
         header, seq, plus, _ = read
@@ -321,7 +358,7 @@ class NewProcess:
 
             sample2raw_read_counts[sample] = sum([read_counts[curr] for curr in read_counts])
 
-            with open('x__sample__{}.counts.fa'.format(sample), 'w') as f:
+            with open('sample___{}.counts.fa'.format(sample), 'w') as f:
                 f.write('\n'.join(['>{}:{}\n{}'.format(seq, read_counts[seq], seq) for seq in read_counts]))
 
             all_fa = []
@@ -329,7 +366,7 @@ class NewProcess:
                 for i in range(read_counts[seq]):
                     all_fa.append('>{}_{}\n{}'.format(seq, i+1, seq))
 
-            with open('x__sample__{}.all.fa'.format(sample), 'w') as f:
+            with open('sample___{}.all.fa'.format(sample), 'w') as f:
                 f.write('\n'.join(all_fa))
 
         return {'read_counts':sample2raw_read_counts, 'reverse_barcodes':reverse_barcode_count, 'other_barcodes':{curr for curr in rest_barcodes if rest_barcodes[curr] > 100000}, 'read_errors':error_count}
