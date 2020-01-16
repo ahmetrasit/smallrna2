@@ -101,6 +101,7 @@ class NewProcess:
         hisat2_cmd.wait()
 
 
+
     def prepare_for_JBrowse(self, folder):
         pass
 
