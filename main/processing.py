@@ -100,8 +100,6 @@ class NewProcess:
         hisat2_cmd = subprocess.Popen(bash_command, shell=True)
         hisat2_cmd.wait()
 
-
-
     def prepare_for_JBrowse(self, folder):
         pass
 
