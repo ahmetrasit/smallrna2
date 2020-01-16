@@ -41,9 +41,11 @@ class NewProcess:
         try:
             print('start_background_process')
             #pool = multiprocessing.Pool(processes=n)
-            #pool.apply_async(func, args=(param,))
+            #pool.apply_async(func, args=(param,), callback=lambda: print('callback works'))
+            p = multiprocessing.Process(target=func, args=(param,))
+            p.start()
             print('start_background_process2')
-            func(param)
+            #func(param)
         except Exception as e:
             print('something wrong with the sbp')
 
@@ -86,10 +88,11 @@ class NewProcess:
                                      'do echo $sample; hisat2 --dta-cufflinks -f -a -p {} -x {}{} -U $sample -S $sample.{}.sam;'.format(self.max_cpu, self.ref_folder, reference2index[reference], reference),
                                      'done'])
         else:
+            print('jbrowse-required files')
             bash_command = ' '.join(['for sample in sample___*{};'.format(file_type),
-                                'do echo $sample; hisat2 --dta-cufflinks -f -a -p {} -x {}{} -U $sample -S $sample.{}.sam;'.format(self.max_cpu, self.ref_folder, reference2index[reference], reference),
+                                'do echo $sample; hisat2 --dta-cufflinks --quiet -f -a -p {} -x {}{} -U $sample -S $sample.{}.sam;'.format(self.max_cpu, self.ref_folder, reference2index[reference], reference),
                                 'cat $sample.{}.sam | samtools view -@ {} -Shub - | samtools sort -@ {} - -o $sample.{}.bam; samtools index $sample.{}.bam;'.format(reference, self.max_cpu, self.max_cpu, reference, reference),
-                                'dep =$(samtools view -c -F 260 $sample.{}.bam; ratio =$(echo "scale=3; 1000000/$dep" | bc)'.format(reference),
+                                'dep =$(samtools view -c -F 260 $sample.{}.bam; ratio =$(echo "scale=3; 1000000/$dep" | bc);'.format(reference),
                                 'genomeCoverageBed -split -bg -scale $ratio -g {}ws270.sizes.genome -ibam $sample.{}.bam > $sample.{}.bedgraph;'.format(self.ref_folder, reference, reference),
                                 '{}ucsc-tools/wigToBigWig -clip $sample.{}.bedgraph {}ws270.sizes.genome $sample.{}.bw;'.format(self.ref_folder, reference, self.ref_folder, reference),
                                 'done'])
