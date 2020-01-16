@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="now working using Process">
+      <change beforePath="$PROJECT_DIR$/main/processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/processing.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/processing.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="550">
+              <caret line="105" selection-start-line="105" selection-end-line="105" />
+              <folding>
+                <element signature="e#0#16#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>adapter_sequence</find>
+      <find>umi_len =</find>
+      <find>/temp</find>
+      <find>has_umi_needsDebarcoding</find>
+      <find>umi_length_needsDebarcoding</find>
+      <find>def processRead</find>
+      <find>def debarcodeFile</find>
+      <find>debarcodeFile</find>
+      <find>&gt;'</find>
+      <find>rest_barcodes</find>
+      <find>processRead</find>
+      <find>__</find>
+      <find>align_samples</find>
+      <find>next_task</find>
+      <find>debarcode_and_counts_fa</find>
+      <find>os.chdir(folder)</find>
+      <find>os.chdir(</find>
+      <find>align2</find>
+      <find>task_after_upload</find>
+      <find>start_background_process3</find>
+      <find>start_background_process</find>
+      <find>save_raw</find>
+      <find>task</find>
+      <find>multipro</find>
+      <find>task_aft</find>
+      <find>hisat2</find>
+      <find>create_counts_fa</find>
+      <find>determine_next_task</find>
+      <find>cutadapt</find>
+      <find>create_counts</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>sample___</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/main/models.py" />
+        <option value="$PROJECT_DIR$/templates/sign-in.html" />
+        <option value="$PROJECT_DIR$/templates/sign-up.html" />
+        <option value="$PROJECT_DIR$/templates/_modal_new_project.html" />
+        <option value="$PROJECT_DIR$/templates/home.html" />
+        <option value="$PROJECT_DIR$/main/urls.py" />
+        <option value="$PROJECT_DIR$/smallrna/settings.py" />
+        <option value="$PROJECT_DIR$/db_instructions.txt" />
+        <option value="$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir11/cutadapt_report.txt" />
+        <option value="$PROJECT_DIR$/templates/_modal_new_dataset.html" />
+        <option value="$PROJECT_DIR$/main/views.py" />
+        <option value="$PROJECT_DIR$/main/static/css/floating_label.css" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/main/processing.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="54" />
+    <option name="y" value="23" />
+    <option name="width" value="1920" />
+    <option name="height" value="1311" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane" />
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="smallrna2" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PycharmProjects/smallrna2" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="smallrna2" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PycharmProjects/smallrna2" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="static" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.smartKeys" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
+      <module name="smallrna" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/local/Cellar/python/3.7.0/Frameworks/Python.framework/Versions/3.7/bin/python3.7" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="localhost" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="http://localhost:8000/" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="django" type="Python.DjangoServer" factoryName="Django server">
+      <module name="smallrna" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="smallrna.settings" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/local/Cellar/python/3.7.0/Frameworks/Python.framework/Versions/3.7/bin/python3.7" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="localhost" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="http://localhost:8000/" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="" />
+      <created>1560359110893</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1560359110893</updated>
+      <workItem from="1560369067721" duration="3991000" />
+      <workItem from="1560536134119" duration="6050000" />
+      <workItem from="1560879519818" duration="11923000" />
+      <workItem from="1560892754963" duration="37000" />
+      <workItem from="1560969655202" duration="4428000" />
+      <workItem from="1561566673393" duration="12235000" />
+      <workItem from="1561675728650" duration="1913000" />
+      <workItem from="1565292938467" duration="4483000" />
+      <workItem from="1565299444614" duration="625000" />
+      <workItem from="1565300112022" duration="7643000" />
+      <workItem from="1578693035517" duration="2769000" />
+      <workItem from="1578945956707" duration="27000" />
+      <workItem from="1578946004747" duration="10479000" />
+      <workItem from="1579036695984" duration="8280000" />
+      <workItem from="1579120129997" duration="9940000" />
+      <workItem from="1579204659584" duration="3707000" />
+      <workItem from="1579210569754" duration="826000" />
+    </task>
+    <task id="LOCAL-00001" summary="finished model.">
+      <created>1560369193209</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1560369193209</updated>
+    </task>
+    <task id="LOCAL-00002" summary="ui projects">
+      <created>1560373006081</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1560373006081</updated>
+    </task>
+    <task id="LOCAL-00003" summary="ui projects">
+      <created>1560373036590</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1560373036590</updated>
+    </task>
+    <task id="LOCAL-00004" summary="small fix">
+      <created>1560551290843</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1560551290843</updated>
+    </task>
+    <task id="LOCAL-00005" summary="barcode and sample name for upload ready.">
+      <created>1560892705719</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1560892705719</updated>
+    </task>
+    <task id="LOCAL-00006" summary="barcode and sample name for upload ready">
+      <created>1560892777335</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1560892777335</updated>
+    </task>
+    <task id="LOCAL-00007" summary="create new dataset modal ui allows barcode selection">
+      <created>1560983509965</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1560983509965</updated>
+    </task>
+    <task id="LOCAL-00008" summary="files can be uploaded. next is data handling">
+      <created>1561587124629</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1561587124629</updated>
+    </task>
+    <task id="LOCAL-00009" summary="switched to mysql. limiting no of active processes now working.">
+      <created>1565301214651</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1565301214651</updated>
+    </task>
+    <task id="LOCAL-00010" summary="db instructions for mysql">
+      <created>1565301301635</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1565301301635</updated>
+    </task>
+    <task id="LOCAL-00011" summary="implementing parallel debarcoding">
+      <created>1565307895791</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1565307895791</updated>
+    </task>
+    <task id="LOCAL-00012" summary="UMI option added to UI">
+      <created>1578697540886</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1578697540886</updated>
+    </task>
+    <task id="LOCAL-00013" summary="debarcoding part is now implemented, needs testing.">
+      <created>1578959882566</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1578959882566</updated>
+    </task>
+    <task id="LOCAL-00014" summary="adding adapter and umi removal to no-need-barcoding part">
+      <created>1579039290387</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1579039290387</updated>
+    </task>
+    <task id="LOCAL-00015" summary="no need for barcoding part works now. Counts_fa is OK, now time for JBrowser and alignments">
+      <created>1579044951403</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1579044951403</updated>
+    </task>
+    <task id="LOCAL-00016" summary="bugs fixed, now alignment and JBrowse.">
+      <created>1579123702302</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1579123702302</updated>
+    </task>
+    <task id="LOCAL-00017" summary="alignment part implemented, now testing">
+      <created>1579131253376</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1579131253376</updated>
+    </task>
+    <task id="LOCAL-00018" summary="multiprocessing not working :/">
+      <created>1579133799799</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1579133799799</updated>
+    </task>
+    <task id="LOCAL-00019" summary="now working using Process">
+      <created>1579210635278</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1579210635278</updated>
+    </task>
+    <task id="LOCAL-00020" summary="now working using Process">
+      <created>1579211090268</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1579211090268</updated>
+    </task>
+    <task id="LOCAL-00021" summary="ready for test">
+      <created>1579211349450</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1579211349450</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="89356000" />
+  </component>
+  <component name="TodoView" selected-index="4">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="54" y="23" width="1920" height="1311" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.38019168" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32988048" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.195242" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3297785" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" sideWeight="0.49946752" visible="true" weight="0.32895815" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.340443" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5005325" side_tool="true" weight="0.32895815" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32981133" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="12" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Data View" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="SciView" order="5" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="finished model." />
+    <MESSAGE value="ui projects" />
+    <MESSAGE value="small fix" />
+    <MESSAGE value="barcode and sample name for upload ready." />
+    <MESSAGE value="barcode and sample name for upload ready" />
+    <MESSAGE value="create new dataset modal ui allows barcode selection" />
+    <MESSAGE value="files can be uploaded. next is data handling" />
+    <MESSAGE value="switched to mysql. limiting no of active processes now working." />
+    <MESSAGE value="db instructions for mysql" />
+    <MESSAGE value="implementing parallel debarcoding" />
+    <MESSAGE value="UMI option added to UI" />
+    <MESSAGE value="debarcoding part is now implemented, needs testing." />
+    <MESSAGE value="adding adapter and umi removal to no-need-barcoding part" />
+    <MESSAGE value="no need for barcoding part works now. Counts_fa is OK, now time for JBrowser and alignments" />
+    <MESSAGE value="bugs fixed, now alignment and JBrowse." />
+    <MESSAGE value="alignment part implemented, now testing" />
+    <MESSAGE value="multiprocessing not working :/" />
+    <MESSAGE value="now working through Process." />
+    <MESSAGE value="now working using Process" />
+    <MESSAGE value="ready for test" />
+    <option name="LAST_COMMIT_MESSAGE" value="ready for test" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/hazir/dataset_annotation.json" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir12/dataset_annotation.json" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir11/cutadapt_report.txt" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir11/dataset_annotation.json" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir13/cutadapt_report.txt" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir13/dataset_annotation.json" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/b4/cutadapt_report.txt" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/b4/temp/merged.fastq" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/b4/dataset_annotation.json" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/b6/dataset_annotation.json" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/b6/x__sample__deneme.counts.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/b6/x__sample__deneme.all.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/b2/__sample__deneme.all.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/b2/__sample__deneme.counts.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/b2/x__sample__birinci.all.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/b1/__sample__1c.all.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/b2/x__sample__ikinci.all.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/b2/x__sample__birinci.counts.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/a7/x__sample__birinci.all.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/a7/x__sample__ikinci.all.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/a7/x__sample__ikinci.counts.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/q1/cutadapt_report.txt" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/q1/dataset_annotation.json" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/q1/x__sample__birinci.all.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/q1/x__sample__birinci.counts.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/q1/x__sample__ikinci.all.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/q1/x__sample__ikinci.counts.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/q3/__sample__2b.counts.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/q3/__sample__3a.all.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/q3/__sample__2b.fastq.gz.cutadapt_report" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/q3/__sample__3a.fastq.gz.cutadapt_report" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/q3/dataset_annotation.json" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/q3/__sample__2b.all.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/q7/sample___2bb.all.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/q7/sample___2bb.all.fa.sam" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/q7/sample___2bb.counts.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/q7/sample___2bb.counts.fa.sam" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/q7/dataset_annotation.json" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/11/sample___3ader.fastq.gz.cutadapt_report" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/siyuan-04jan19/dataset_annotation.json" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/siyuan1/dataset_annotation.json" />
+    <entry file="file://$PROJECT_DIR$/main/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/static/css/floating_label.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="5" column="27" lean-forward="true" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/s11/dataset_annotation.json" />
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/asdfasdf/dataset_annotation.json" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/asdfasdf/sample___wt.all.fa" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/asdfasdf/sample___wt.fastq.gz.cutadapt_report" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/s5/dataset_annotation.json" />
+    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/s5/sample___s5.fastq.gz.cutadapt_report" />
+    <entry file="file://$PROJECT_DIR$/main/processing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="105" selection-start-line="105" selection-end-line="105" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
