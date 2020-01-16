@@ -11,8 +11,8 @@ import gzip
 
 
 class NewProcess:
-    max_active_tasks = 5
-    max_cpu = 20
+    max_active_tasks = 1
+    max_cpu = 4
     ref_folder = '../../../../reference/'
     pairs = {'AGNCT'[i]: 'AGNCT'[4 - i] for i in range(5)}
 
@@ -32,7 +32,7 @@ class NewProcess:
     def new_dataset(self):
         try:
             raw_data_folder = self.save_raw_data()
-            self.start_background_process(self.task_after_upload, raw_data_folder, 5)
+            self.start_background_process(self.task_after_upload, raw_data_folder, self.max_active_tasks)
         except Exception as e:
             print('error saving files:', str(e))
 
@@ -40,15 +40,15 @@ class NewProcess:
     def start_background_process(func, param, n):
         try:
             print('start_background_process')
-            pool = multiprocessing.Pool(processes=n)
+            #pool = multiprocessing.Pool(processes=n)
+            #pool.apply_async(func, args=(param,))
             print('start_background_process2')
-            pool.apply_async(func, args=(param,))
-            print('start_background_process3')
+            func(param)
         except Exception as e:
             print('something wrong with the sbp')
 
     def task_after_upload(self, raw_data_folder):
-        print('task_after_upload')
+        print('>task_after_upload')
         task = self.submit_task()
         try:
             wait = True

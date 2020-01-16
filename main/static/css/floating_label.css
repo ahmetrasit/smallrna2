@@ -34,3 +34,7 @@ div.jumbotron-link:hover {
 .adapter_umi {
     background-color: #cce5ff !important;
 }
+
+.modal {
+  overflow-y:auto;
+}
