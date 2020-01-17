@@ -12,7 +12,7 @@ import gzip
 
 class NewProcess:
     max_active_tasks = 1
-    max_cpu = 4
+    max_cpu = 10
     ref_folder = '../../../../reference/'
     pairs = {'AGNCT'[i]: 'AGNCT'[4 - i] for i in range(5)}
 
@@ -85,14 +85,14 @@ class NewProcess:
         #os.chdir(folder)
         if file_type == 'counts.fa':
             bash_command = ' '.join(['for sample in sample___*{};'.format(file_type),
-                                     'do echo $sample; hisat2 --dta-cufflinks -f -a -p {} -x {}{} -U $sample -S $sample.{}.sam;'.format(self.max_cpu, self.ref_folder, reference2index[reference], reference),
+                                     'do echo $sample; hisat2 --dta-cufflinks --quiet -f -a -p {} -x {}{} -U $sample -S $sample.{}.sam;'.format(self.max_cpu, self.ref_folder, reference2index[reference], reference),
                                      'done'])
         else:
             print('jbrowse-required files')
             bash_command = ' '.join(['for sample in sample___*{};'.format(file_type),
                                 'do echo $sample; hisat2 --dta-cufflinks --quiet -f -a -p {} -x {}{} -U $sample -S $sample.{}.sam;'.format(self.max_cpu, self.ref_folder, reference2index[reference], reference),
                                 'cat $sample.{}.sam | samtools view -@ {} -Shub - | samtools sort -@ {} - -o $sample.{}.bam; samtools index $sample.{}.bam;'.format(reference, self.max_cpu, self.max_cpu, reference, reference),
-                                'dep =$(samtools view -c -F 260 $sample.{}.bam; ratio =$(echo "scale=3; 1000000/$dep" | bc);'.format(reference),
+                                'dep =$(samtools view -c -F 260 $sample.{}.bam); ratio =$(echo "scale=3; 1000000/$dep" | bc);'.format(reference),
                                 'genomeCoverageBed -split -bg -scale $ratio -g {}ws270.sizes.genome -ibam $sample.{}.bam > $sample.{}.bedgraph;'.format(self.ref_folder, reference, reference),
                                 '{}ucsc-tools/wigToBigWig -clip $sample.{}.bedgraph {}ws270.sizes.genome $sample.{}.bw;'.format(self.ref_folder, reference, self.ref_folder, reference),
                                 'done'])
@@ -193,7 +193,7 @@ class NewProcess:
             adapter = self.parameters['adapter_sequence'][0].strip()
             for file in renamed_filenames:
                 bash_command = ' '.join(
-                    ['cutadapt -m 10', '-a', adapter, '-j', str(self.max_cpu), '-o', '{}.trimmed.fastq.gz'.format(file),
+                    ['cutadapt', '-a', adapter, '-j', str(self.max_cpu), '-m 10 -o', '{}.trimmed.fastq.gz'.format(file),
                      '{}'.format(file),
                      '; mv', '{}.trimmed.fastq.gz'.format(file), '{}'.format(file)])
                 cutadapt_cmd = subprocess.Popen(bash_command, shell=True, stdout=subprocess.PIPE)
@@ -269,7 +269,7 @@ class NewProcess:
         print('parameters', self.parameters)
         if 'remove_adapter' in self.parameters:
             adapter = self.parameters['adapter_sequence'][0].strip()
-            bash_command = ' '.join(['cutadapt -m 10', '-a', adapter, '-j', str(self.max_cpu), '-o', './temp/trimmed.fastq.gz', './temp/merged.fastq.gz', '; mv', './temp/trimmed.fastq.gz', './temp/merged.fastq.gz'])
+            bash_command = ' '.join(['cutadapt', '-a', adapter, '-j', str(self.max_cpu), '-m 10 -o', './temp/trimmed.fastq.gz', './temp/merged.fastq.gz', '; mv', './temp/trimmed.fastq.gz', './temp/merged.fastq.gz'])
             cutadapt_cmd = subprocess.Popen(bash_command, shell=True, stdout=subprocess.PIPE)
             stdout = str(cutadapt_cmd.communicate()[0], 'utf-8').split('\n')
             with open('cutadapt_report.txt', 'w') as f:
