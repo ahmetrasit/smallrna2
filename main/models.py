@@ -105,7 +105,7 @@ class Stats(models.Model):
 
 class Task(models.Model):
     name = models.TextField()
-    task_type = models.CharField(max_length=64, default='processing')
+    task_type = models.CharField(max_length=32, default='processing')
     status = models.TextField(default='waiting')
     message = models.TextField(null=True)
     created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)

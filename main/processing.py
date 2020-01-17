@@ -70,7 +70,7 @@ class NewProcess:
             print(processed_data_folder)
             self.update_task_status(task, 'finished', '')
         except Exception as e:
-            print('error', str(e))
+            print('error_tau', str(e))
             traceback.print_exc()
             self.update_task_status(task, 'error', str(e))
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="ready for test">
+    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="better">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smallrna/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/smallrna/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/processing.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,8 +20,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2185">
-              <caret line="104" selection-start-line="104" selection-end-line="104" />
+            <state relative-caret-position="409">
+              <caret line="124" column="8" lean-forward="true" selection-start-line="124" selection-start-column="8" selection-end-line="124" selection-end-column="19" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -29,22 +29,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/smallrna/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="32" column="24" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/views.py">
+        <entry file="file://$PROJECT_DIR$/main/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="86">
-              <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
+            <state relative-caret-position="530">
+              <caret line="107" column="46" selection-start-line="107" selection-start-column="46" selection-end-line="107" selection-end-column="46" />
               <folding>
-                <element signature="e#0#15#0" expanded="true" />
+                <element signature="e#0#68#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -61,16 +52,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>adapter_sequence</find>
-      <find>umi_len =</find>
-      <find>/temp</find>
-      <find>has_umi_needsDebarcoding</find>
-      <find>umi_length_needsDebarcoding</find>
-      <find>def processRead</find>
-      <find>def debarcodeFile</find>
-      <find>debarcodeFile</find>
-      <find>&gt;'</find>
-      <find>rest_barcodes</find>
       <find>processRead</find>
       <find>__</find>
       <find>align_samples</find>
@@ -83,7 +64,6 @@
       <find>start_background_process3</find>
       <find>start_background_process</find>
       <find>save_raw</find>
-      <find>task</find>
       <find>multipro</find>
       <find>task_aft</find>
       <find>hisat2</find>
@@ -91,6 +71,17 @@
       <find>determine_next_task</find>
       <find>cutadapt</find>
       <find>create_counts</find>
+      <find>user</find>
+      <find>username =</find>
+      <find>update_task_status</find>
+      <find>submit</find>
+      <find>error</find>
+      <find>default=0</find>
+      <find>task</find>
+      <find>addf</find>
+      <find>error'</find>
+      <find>id</find>
+      <find>auto</find>
     </findStrings>
     <replaceStrings>
       <replace>sample___</replace>
@@ -102,7 +93,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/main/models.py" />
         <option value="$PROJECT_DIR$/templates/sign-in.html" />
         <option value="$PROJECT_DIR$/templates/sign-up.html" />
         <option value="$PROJECT_DIR$/templates/_modal_new_project.html" />
@@ -114,8 +104,9 @@
         <option value="$PROJECT_DIR$/templates/_modal_new_dataset.html" />
         <option value="$PROJECT_DIR$/main/static/css/floating_label.css" />
         <option value="$PROJECT_DIR$/templates/base.html" />
-        <option value="$PROJECT_DIR$/main/processing.py" />
         <option value="$PROJECT_DIR$/main/views.py" />
+        <option value="$PROJECT_DIR$/main/processing.py" />
+        <option value="$PROJECT_DIR$/main/models.py" />
       </list>
     </option>
   </component>
@@ -144,6 +135,12 @@
               <item name="smallrna2" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="~/PycharmProjects/smallrna2" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="smallrna2" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PycharmProjects/smallrna2" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="migrations" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="smallrna2" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -257,7 +254,7 @@
       <workItem from="1579120129997" duration="9940000" />
       <workItem from="1579204659584" duration="3707000" />
       <workItem from="1579210569754" duration="2142000" />
-      <workItem from="1579297804822" duration="58000" />
+      <workItem from="1579297804822" duration="1772000" />
     </task>
     <task id="LOCAL-00001" summary="finished model.">
       <created>1560369193209</created>
@@ -420,11 +417,25 @@
       <option name="project" value="LOCAL" />
       <updated>1579211982310</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="remove some print statements">
+      <created>1579297892865</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1579297892865</updated>
+    </task>
+    <task id="LOCAL-00025" summary="increased max_cpu for admin">
+      <created>1579299309050</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1579299309050</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="90730000" />
+    <option name="totallyTimeSpent" value="92444000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -436,7 +447,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="829" y="23" width="1920" height="1311" extended-state="0" />
+    <frame x="411" y="23" width="1920" height="1311" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.38391906" />
@@ -488,11 +499,11 @@
     <MESSAGE value="now working through Process." />
     <MESSAGE value="now working using Process" />
     <MESSAGE value="ready for test" />
-    <option name="LAST_COMMIT_MESSAGE" value="ready for test" />
+    <MESSAGE value="remove some print statements" />
+    <MESSAGE value="increased max_cpu for admin" />
+    <option name="LAST_COMMIT_MESSAGE" value="increased max_cpu for admin" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir12/dataset_annotation.json" />
-    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir11/cutadapt_report.txt" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir11/dataset_annotation.json" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir13/cutadapt_report.txt" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir13/dataset_annotation.json" />
@@ -551,29 +562,46 @@
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/asdfasdf/sample___wt.fastq.gz.cutadapt_report" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/s5/dataset_annotation.json" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/s5/sample___s5.fastq.gz.cutadapt_report" />
+    <entry file="file://$PROJECT_DIR$/smallrna/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="24" column="48" lean-forward="true" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/migrations/0001_initial.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="129" column="22" lean-forward="true" selection-start-line="129" selection-start-column="22" selection-end-line="129" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2185">
-          <caret line="104" selection-start-line="104" selection-end-line="104" />
+        <state relative-caret-position="409">
+          <caret line="124" column="8" lean-forward="true" selection-start-line="124" selection-start-column="8" selection-end-line="124" selection-end-column="19" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/smallrna/settings.py">
+    <entry file="file://$PROJECT_DIR$/main/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="32" column="24" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
+        <state relative-caret-position="530">
+          <caret line="107" column="46" selection-start-line="107" selection-start-column="46" selection-end-line="107" selection-end-column="46" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#68#0" expanded="true" />
           </folding>
         </state>
       </provider>
