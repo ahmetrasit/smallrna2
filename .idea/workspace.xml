@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="bash cmd bug fix">
+    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="ready for test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/processing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smallrna/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/smallrna/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,13 +17,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="94" column="85" selection-start-line="94" selection-start-column="85" selection-end-line="94" selection-end-column="85" />
+            <state relative-caret-position="2185">
+              <caret line="104" selection-start-line="104" selection-end-line="104" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/smallrna/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="237">
+              <caret line="32" column="24" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="86">
+              <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -39,6 +61,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>adapter_sequence</find>
       <find>umi_len =</find>
       <find>/temp</find>
       <find>has_umi_needsDebarcoding</find>
@@ -63,12 +86,11 @@
       <find>task</find>
       <find>multipro</find>
       <find>task_aft</find>
+      <find>hisat2</find>
       <find>create_counts_fa</find>
       <find>determine_next_task</find>
       <find>cutadapt</find>
       <find>create_counts</find>
-      <find>hisat2</find>
-      <find>-m</find>
     </findStrings>
     <replaceStrings>
       <replace>sample___</replace>
@@ -90,15 +112,15 @@
         <option value="$PROJECT_DIR$/db_instructions.txt" />
         <option value="$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir11/cutadapt_report.txt" />
         <option value="$PROJECT_DIR$/templates/_modal_new_dataset.html" />
-        <option value="$PROJECT_DIR$/main/views.py" />
         <option value="$PROJECT_DIR$/main/static/css/floating_label.css" />
         <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/main/processing.py" />
+        <option value="$PROJECT_DIR$/main/views.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="54" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="411" />
     <option name="y" value="23" />
     <option name="width" value="1920" />
     <option name="height" value="1311" />
@@ -117,6 +139,21 @@
             <path>
               <item name="smallrna2" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="~/PycharmProjects/smallrna2" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="smallrna2" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PycharmProjects/smallrna2" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="smallrna2" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PycharmProjects/smallrna2" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="smallrna" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="smallrna2" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PycharmProjects/smallrna2" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="static" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -219,8 +256,8 @@
       <workItem from="1579036695984" duration="8280000" />
       <workItem from="1579120129997" duration="9940000" />
       <workItem from="1579204659584" duration="3707000" />
-      <workItem from="1579210569754" duration="826000" />
-      <workItem from="1579226912991" duration="1171000" />
+      <workItem from="1579210569754" duration="2142000" />
+      <workItem from="1579297804822" duration="58000" />
     </task>
     <task id="LOCAL-00001" summary="finished model.">
       <created>1560369193209</created>
@@ -369,18 +406,25 @@
       <option name="project" value="LOCAL" />
       <updated>1579211349450</updated>
     </task>
-    <task id="LOCAL-00022" summary="bash cmd bug fix">
-      <created>1579231901221</created>
+    <task id="LOCAL-00022" summary="ready for test">
+      <created>1579211457821</created>
       <option name="number" value="00022" />
       <option name="presentableId" value="LOCAL-00022" />
       <option name="project" value="LOCAL" />
-      <updated>1579231901221</updated>
+      <updated>1579211457821</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="ready for test">
+      <created>1579211982310</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1579211982310</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="90527000" />
+    <option name="totallyTimeSpent" value="90730000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -392,10 +436,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="877" extended-state="6" />
+    <frame x="829" y="23" width="1920" height="1311" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20415473" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.38391906" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -405,9 +449,9 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3297785" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="7" sideWeight="0.49946752" visible="true" weight="0.15070243" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49840257" visible="true" weight="0.32895815" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.340443" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5005325" side_tool="true" weight="0.32895815" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50159746" side_tool="true" visible="true" weight="0.32895815" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32981133" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
@@ -444,8 +488,7 @@
     <MESSAGE value="now working through Process." />
     <MESSAGE value="now working using Process" />
     <MESSAGE value="ready for test" />
-    <MESSAGE value="bash cmd bug fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="bash cmd bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="ready for test" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir12/dataset_annotation.json" />
@@ -488,16 +531,6 @@
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/11/sample___3ader.fastq.gz.cutadapt_report" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/siyuan-04jan19/dataset_annotation.json" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/siyuan1/dataset_annotation.json" />
-    <entry file="file://$PROJECT_DIR$/main/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/static/css/floating_label.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="106">
@@ -518,19 +551,29 @@
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/asdfasdf/sample___wt.fastq.gz.cutadapt_report" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/s5/dataset_annotation.json" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/s5/sample___s5.fastq.gz.cutadapt_report" />
-    <entry file="file://$PROJECT_DIR$/db_instructions.txt">
+    <entry file="file://$PROJECT_DIR$/main/processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="6" column="9" lean-forward="true" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
+        <state relative-caret-position="2185">
+          <caret line="104" selection-start-line="104" selection-end-line="104" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/processing.py">
+    <entry file="file://$PROJECT_DIR$/smallrna/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="94" column="85" selection-start-line="94" selection-start-column="85" selection-end-line="94" selection-end-column="85" />
+        <state relative-caret-position="237">
+          <caret line="32" column="24" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
           <folding>
-            <element signature="e#0#16#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>

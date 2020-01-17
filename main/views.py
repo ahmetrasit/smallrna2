@@ -58,8 +58,8 @@ class FileUploadView(View):
     template_name = 'home.html'
 
     def post(self, request, *args, **kwargs):
-        print('post', request.POST.keys())
-        print(request.POST.getlist('noDebarcoding_sampleName'))
+        #print('post', request.POST.keys())
+        #print(request.POST.getlist('noDebarcoding_sampleName'))
         uploaded = request.FILES.getlist('fileupload')
         try:
             print(request.POST['new_dataset_focus'])

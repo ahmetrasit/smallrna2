@@ -27,7 +27,7 @@ SECRET_KEY = 'n6i_7gjtfc8ghmk(%cyu#6ua+nj!v_0+0ivx9dn#rgdemgoznb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['smallrna.umassmed.edu']
 
 
 # Application definition
