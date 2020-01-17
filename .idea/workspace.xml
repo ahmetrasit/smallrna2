@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="now working using Process">
+    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="bash cmd bug fix">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/processing.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="105" selection-start-line="105" selection-end-line="105" />
+            <state relative-caret-position="209">
+              <caret line="94" column="85" selection-start-line="94" selection-start-column="85" selection-end-line="94" selection-end-column="85" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -38,7 +39,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>adapter_sequence</find>
       <find>umi_len =</find>
       <find>/temp</find>
       <find>has_umi_needsDebarcoding</find>
@@ -63,11 +63,12 @@
       <find>task</find>
       <find>multipro</find>
       <find>task_aft</find>
-      <find>hisat2</find>
       <find>create_counts_fa</find>
       <find>determine_next_task</find>
       <find>cutadapt</find>
       <find>create_counts</find>
+      <find>hisat2</find>
+      <find>-m</find>
     </findStrings>
     <replaceStrings>
       <replace>sample___</replace>
@@ -96,7 +97,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="54" />
     <option name="y" value="23" />
     <option name="width" value="1920" />
@@ -110,7 +111,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -118,15 +118,11 @@
               <item name="smallrna2" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="~/PycharmProjects/smallrna2" type="442cc68d:ScopeViewTreeModel$RootNode" />
             </path>
-            <path>
-              <item name="smallrna2" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PycharmProjects/smallrna2" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="static" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -224,6 +220,7 @@
       <workItem from="1579120129997" duration="9940000" />
       <workItem from="1579204659584" duration="3707000" />
       <workItem from="1579210569754" duration="826000" />
+      <workItem from="1579226912991" duration="1171000" />
     </task>
     <task id="LOCAL-00001" summary="finished model.">
       <created>1560369193209</created>
@@ -372,11 +369,18 @@
       <option name="project" value="LOCAL" />
       <updated>1579211349450</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="bash cmd bug fix">
+      <created>1579231901221</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1579231901221</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89356000" />
+    <option name="totallyTimeSpent" value="90527000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -388,13 +392,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="54" y="23" width="1920" height="1311" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="877" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.38019168" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20415473" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32988048" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.195242" />
@@ -402,12 +405,13 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3297785" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="7" sideWeight="0.49946752" visible="true" weight="0.32895815" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" sideWeight="0.49946752" visible="true" weight="0.15070243" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.340443" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5005325" side_tool="true" weight="0.32895815" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32981133" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
+      <window_info anchor="bottom" id="Messages" order="13" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -440,10 +444,10 @@
     <MESSAGE value="now working through Process." />
     <MESSAGE value="now working using Process" />
     <MESSAGE value="ready for test" />
-    <option name="LAST_COMMIT_MESSAGE" value="ready for test" />
+    <MESSAGE value="bash cmd bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="bash cmd bug fix" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/hazir/dataset_annotation.json" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir12/dataset_annotation.json" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir11/cutadapt_report.txt" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir11/dataset_annotation.json" />
@@ -514,10 +518,17 @@
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/asdfasdf/sample___wt.fastq.gz.cutadapt_report" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/s5/dataset_annotation.json" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/s5/sample___s5.fastq.gz.cutadapt_report" />
+    <entry file="file://$PROJECT_DIR$/db_instructions.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="9" lean-forward="true" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="105" selection-start-line="105" selection-end-line="105" />
+        <state relative-caret-position="209">
+          <caret line="94" column="85" selection-start-line="94" selection-start-column="85" selection-end-line="94" selection-end-column="85" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>

@@ -92,7 +92,7 @@ class NewProcess:
             bash_command = ' '.join(['for sample in sample___*{};'.format(file_type),
                                 'do echo $sample; hisat2 --dta-cufflinks --quiet -f -a -p {} -x {}{} -U $sample -S $sample.{}.sam;'.format(self.max_cpu, self.ref_folder, reference2index[reference], reference),
                                 'cat $sample.{}.sam | samtools view -@ {} -Shub - | samtools sort -@ {} - -o $sample.{}.bam; samtools index $sample.{}.bam;'.format(reference, self.max_cpu, self.max_cpu, reference, reference),
-                                'dep =$(samtools view -c -F 260 $sample.{}.bam); ratio =$(echo "scale=3; 1000000/$dep" | bc);'.format(reference),
+                                'dep=$(samtools view -c -F 260 $sample.{}.bam); ratio=$(echo "scale=3; 1000000/$dep" | bc);'.format(reference),
                                 'genomeCoverageBed -split -bg -scale $ratio -g {}ws270.sizes.genome -ibam $sample.{}.bam > $sample.{}.bedgraph;'.format(self.ref_folder, reference, reference),
                                 '{}ucsc-tools/wigToBigWig -clip $sample.{}.bedgraph {}ws270.sizes.genome $sample.{}.bw;'.format(self.ref_folder, reference, self.ref_folder, reference),
                                 'done'])
