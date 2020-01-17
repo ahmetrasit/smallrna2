@@ -22,7 +22,7 @@ class NewProcess:
     def __init__(self, parameters, user, files):
         self.user = user
         self.username = str(user).split("@")[0]
-        if ahmet in self.username.lower():
+        if 'ahmet' in self.username.lower():
             self.max_cpu = 30
             self.max_active_tasks = 2
         self.parameters = {}
