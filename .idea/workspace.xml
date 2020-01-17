@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="better">
+    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="bug fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/processing.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,11 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="409">
-              <caret line="124" column="8" lean-forward="true" selection-start-line="124" selection-start-column="8" selection-end-line="124" selection-end-column="19" />
+            <state relative-caret-position="549">
+              <caret line="108" column="26" lean-forward="true" selection-start-line="108" selection-start-column="26" selection-end-line="108" selection-end-column="26" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -29,16 +27,21 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="530">
-              <caret line="107" column="46" selection-start-line="107" selection-start-column="46" selection-end-line="107" selection-end-column="46" />
+            <state relative-caret-position="415">
+              <caret line="102" column="52" lean-forward="true" selection-start-line="102" selection-start-column="52" selection-end-line="102" selection-end-column="52" />
               <folding>
                 <element signature="e#0#68#0" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/migrations/0002_auto_20200117_2241.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -52,7 +55,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>processRead</find>
       <find>__</find>
       <find>align_samples</find>
       <find>next_task</find>
@@ -82,6 +84,7 @@
       <find>error'</find>
       <find>id</find>
       <find>auto</find>
+      <find>ahmet</find>
     </findStrings>
     <replaceStrings>
       <replace>sample___</replace>
@@ -105,8 +108,8 @@
         <option value="$PROJECT_DIR$/main/static/css/floating_label.css" />
         <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/main/views.py" />
-        <option value="$PROJECT_DIR$/main/processing.py" />
         <option value="$PROJECT_DIR$/main/models.py" />
+        <option value="$PROJECT_DIR$/main/processing.py" />
       </list>
     </option>
   </component>
@@ -254,7 +257,7 @@
       <workItem from="1579120129997" duration="9940000" />
       <workItem from="1579204659584" duration="3707000" />
       <workItem from="1579210569754" duration="2142000" />
-      <workItem from="1579297804822" duration="1772000" />
+      <workItem from="1579297804822" duration="2545000" />
     </task>
     <task id="LOCAL-00001" summary="finished model.">
       <created>1560369193209</created>
@@ -431,11 +434,25 @@
       <option name="project" value="LOCAL" />
       <updated>1579299309050</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="better error message">
+      <created>1579300892270</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1579300892270</updated>
+    </task>
+    <task id="LOCAL-00027" summary="bug fix">
+      <created>1579301001444</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1579301001444</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92444000" />
+    <option name="totallyTimeSpent" value="93217000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -450,7 +467,7 @@
     <frame x="411" y="23" width="1920" height="1311" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.38391906" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.38391906" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -460,9 +477,9 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3297785" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49840257" visible="true" weight="0.32895815" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.340443" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50159746" side_tool="true" visible="true" weight="0.32895815" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49840257" weight="0.32895815" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49946752" weight="0.340443" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5005325" side_tool="true" weight="0.340443" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32981133" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
@@ -474,6 +491,31 @@
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="5" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.38391906" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32988048" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.195242" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3297785" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49840257" weight="0.32895815" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49946752" visible="true" weight="0.340443" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5005325" side_tool="true" visible="true" weight="0.340443" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32981133" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="12" />
+      <window_info anchor="bottom" id="Messages" order="13" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Data View" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="SciView" order="5" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -501,10 +543,11 @@
     <MESSAGE value="ready for test" />
     <MESSAGE value="remove some print statements" />
     <MESSAGE value="increased max_cpu for admin" />
-    <option name="LAST_COMMIT_MESSAGE" value="increased max_cpu for admin" />
+    <MESSAGE value="better error message" />
+    <MESSAGE value="bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fix" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir11/dataset_annotation.json" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir13/cutadapt_report.txt" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir13/dataset_annotation.json" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/b4/cutadapt_report.txt" />
@@ -586,22 +629,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/processing.py">
+    <entry file="file://$PROJECT_DIR$/main/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="124" column="8" lean-forward="true" selection-start-line="124" selection-start-column="8" selection-end-line="124" selection-end-column="19" />
+        <state relative-caret-position="415">
+          <caret line="102" column="52" lean-forward="true" selection-start-line="102" selection-start-column="52" selection-end-line="102" selection-end-column="52" />
           <folding>
-            <element signature="e#0#16#0" expanded="true" />
+            <element signature="e#0#68#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/models.py">
+    <entry file="file://$PROJECT_DIR$/main/migrations/0002_auto_20200117_2241.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="107" column="46" selection-start-line="107" selection-start-column="46" selection-end-line="107" selection-end-column="46" />
+        <state relative-caret-position="549">
+          <caret line="108" column="26" lean-forward="true" selection-start-line="108" selection-start-column="26" selection-end-line="108" selection-end-column="26" />
           <folding>
-            <element signature="e#0#68#0" expanded="true" />
+            <element signature="e#0#16#0" expanded="true" />
           </folding>
         </state>
       </provider>
