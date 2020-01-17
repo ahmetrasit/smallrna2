@@ -106,6 +106,7 @@ class NewProcess:
     def prepare_for_JBrowse(self, folder):
         pass
 
+
     def submit_task(self):
         try:
             task = models.Task(
