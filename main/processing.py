@@ -64,9 +64,9 @@ class NewProcess:
             next_task = self.determine_next_task()
             processed_data_folder = next_task(raw_data_folder)
             print('>Aligning data')
-            self.align_samples(processed_data_folder)
+            sample2bam, sample2bw = self.align_samples(processed_data_folder)
             print('>Prepare for JBrowse')
-            self.prepare_for_JBrowse(processed_data_folder)
+            self.prepare_for_JBrowse(processed_data_folder, self.username, self.parameters['new_dataset_name'], sample2bam, sample2bw)
             print(processed_data_folder)
             self.update_task_status(task, 'finished', '')
         except Exception as e:
@@ -75,10 +75,12 @@ class NewProcess:
             self.update_task_status(task, 'error', str(e))
 
     def align_samples(self, folder):
+        samples = [file.replace('sample___', '').replace('.fastq.gz', '') for file in os.listdir('./') if file.startswith('sample___') and file.endswith('fastq.gz')]
         self.align2(folder, 'all.fa', 'genome')
         self.align2(folder, 'counts.fa', 'genome')
         self.align2(folder, 'counts.fa', 'metagenes')
         self.align2(folder, 'counts.fa', 'structural')
+        return {sample: f'sample___{sample}.fastq.gz' for sample in samples}, {sample: f'sample___{sample}.genome.bw' for sample in samples}
 
     def align2(self, folder, file_type, reference):
         reference2index = {'genome':'ws270hisat2', 'metagenes':'ws268metagenome', 'structural':'ws268struc_metagenome'}
@@ -103,9 +105,10 @@ class NewProcess:
         hisat2_cmd = subprocess.Popen(bash_command, shell=True)
         hisat2_cmd.wait()
 
-    def prepare_for_JBrowse(self, folder):
-        pass
-
+    def prepare_for_JBrowse(self, folder, username, dataset, sample2bam, sample2b):
+        conf_dict = self.createJSONConf(username, dataset, sample2bam, sample2bw)
+        with open(f'{folder}/{dataset}.conf', 'w') as f:
+            json.dump(conf_dict, f)
 
     def submit_task(self):
         try:
@@ -376,6 +379,45 @@ class NewProcess:
                 f.write('\n'.join(all_fa))
 
         return {'read_counts':sample2raw_read_counts, 'reverse_barcodes':reverse_barcode_count, 'other_barcodes':{curr for curr in rest_barcodes if rest_barcodes[curr] > 100000}, 'read_errors':error_count}
+
+    def addBAMTrack(self, username, dataset, sample, bam_file):
+        return {
+            "category": f"{username}/{dataset}",
+            "compress": "1",
+            "key": f"{sample}",
+            "label": f"{username}_{dataset}_{sample}",
+            "style": {
+                "className": "function(feature){return \'feature2\'}"
+            },
+            "type": "Alignments2",
+            "urlTemplate": f"{bam_file}"
+        }
+
+    def addBWTrack(self, username, dataset, sample, bw_file):
+        return {
+            "category": f"{username}/{dataset} coverage",
+            "key": f"{sample}",
+            "label": f"{username}_{dataset}_cov_{sample}",
+            "max_score": 250,
+            "min_score": 0,
+            "scale": "log",
+            "storeClass": "JBrowse/Store/SeqFeature/BigWig",
+            "style": {
+                "clip_marker_color": "red",
+                "height": 100,
+                "neg_color": "orange",
+                "pos_color": "green"
+            },
+            "type": "JBrowse/View/Track/Wiggle/XYPlot",
+            "urlTemplate": f"{bw_file}",
+            "variance_band": True
+        }
+
+    def createJSONConf(self, username, dataset, sample2bam, sample2bw):
+        bam_tracks = [self.addBAMTrack(username, dataset, sample, sample2bam[sample]) for sample in sample2bam]
+        bw_tracks = [self.addBWTrack(username, dataset, sample, sample2bam[sample]) for sample in sample2bw]
+        return {"tracks": bam_tracks + bw_tracks}
+
 
 
 
