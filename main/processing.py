@@ -112,7 +112,12 @@ class NewProcess:
         conf_dict = self.createJSONConf(username, dataset, sample2bam, sample2bw)
         with open('tracks.json', 'w') as f:
             json.dump(conf_dict, f)
-        move_to_jbrowse = subprocess.Popen(f'cp ../{folder} /var/www/html/jbrowse/dev/datasets/', shell=True)
+        try:
+            move_to_jbrowse = subprocess.Popen(f'cp ../{folder} /var/www/html/jbrowse/dev/datasets/', shell=True)
+            move_to_jbrowse.wait()
+        except Exception as e:
+            print('copy file to jbrowse exception', str(e))
+            traceback.print_exc()
 
     def submit_task(self):
         try:
