@@ -66,7 +66,7 @@ class NewProcess:
             #print('>Aligning data')
             sample2bam, sample2bw = self.align_samples(processed_data_folder)
             #print('>Prepare for JBrowse')
-            self.prepare_for_JBrowse(processed_data_folder, self.username, self.parameters['new_dataset_name'][0].replace(' ', '_'), sample2bam, sample2bw)
+            self.prepare_for_JBrowse(self.username, self.parameters['new_dataset_name'][0].replace(' ', '_'), sample2bam, sample2bw)
             print(processed_data_folder)
             self.update_task_status(task, 'finished', '')
         except Exception as e:
@@ -105,9 +105,9 @@ class NewProcess:
         hisat2_cmd = subprocess.Popen(bash_command, shell=True)
         hisat2_cmd.wait()
 
-    def prepare_for_JBrowse(self, folder, username, dataset, sample2bam, sample2bw):
+    def prepare_for_JBrowse(self, username, dataset, sample2bam, sample2bw):
         conf_dict = self.createJSONConf(username, dataset, sample2bam, sample2bw)
-        with open(f'{folder}/{dataset}.conf', 'w') as f:
+        with open(f'{dataset}.conf', 'w') as f:
             json.dump(conf_dict, f)
 
     def submit_task(self):
