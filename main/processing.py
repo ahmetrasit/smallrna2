@@ -98,13 +98,13 @@ class NewProcess:
         else:
             print('jbrowse-required files')
             bash_command = ' '.join(['for sample in sample___*{};'.format(file_type),
-                                'do echo $sample; hisat2 --dta-cufflinks --quiet -f -a -p {} -x {}{} -U $sample -S $sample.{}.sam;'.format(self.max_cpu, self.ref_folder, reference2index[reference], reference),
-                                'cat $sample.{}.sam | samtools view -@ {} -Shub - | samtools sort -@ {} - -o $sample.{}.bam; samtools index $sample.{}.bam;'.format(reference, self.max_cpu, self.max_cpu, reference, reference),
-                                'dep=$(samtools view -c -F 260 $sample.{}.bam); ratio=$(echo "scale=3; 1000000/$dep" | bc);'.format(reference),
-                                'genomeCoverageBed -split -bg -scale $ratio -g {}ws270.sizes.genome -ibam $sample.{}.bam > $sample.{}.bedgraph;'.format(self.ref_folder, reference, reference),
-                                '{}ucsc-tools/wigToBigWig -clip $sample.{}.bedgraph {}ws270.sizes.genome $sample.{}.bw;'.format(self.ref_folder, reference, self.ref_folder, reference),
+                                f'do echo $sample; hisat2 --dta-cufflinks -f -a -p {self.max_cpu} -x {self.ref_folder}{reference2index[reference]} -U $sample -S $sample.{reference}.sam; ',
+                                f'cat $sample.{reference}.sam | samtools view -@ {self.max_cpu} -Shub - | samtools sort -@ {self.max_cpu} - -o $sample.{reference}.bam; samtools index $sample.{reference}.bam; ',
+                                f'dep=$(samtools view -c -F 260 $sample.{reference}.bam); ratio=$(echo "scale=3; 1000000/$dep" | bc); ',
+                                f'genomeCoverageBed -split -bg -scale $ratio -g {self.ref_folder}ws270.sizes.genome -ibam $sample.{reference}.bam > $sample.{reference}.bedgraph; ',
+                                f'{self.ref_folder}ucsc-tools/wigToBigWig -clip $sample.{reference}.bedgraph {self.ref_folder}ws270.sizes.genome $sample.{reference}.bw; ',
                                 'done'])
-        #print('H2>', bash_command)
+        print('H2>', bash_command)
         hisat2_cmd = subprocess.Popen(bash_command, shell=True)
         hisat2_cmd.wait()
 
