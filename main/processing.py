@@ -66,7 +66,7 @@ class NewProcess:
             #print('>Aligning data')
             sample2bam, sample2bw = self.align_samples(processed_data_folder)
             #print('>Prepare for JBrowse')
-            self.prepare_for_JBrowse(processed_data_folder, self.username, self.parameters['new_dataset_name'], sample2bam, sample2bw)
+            self.prepare_for_JBrowse(processed_data_folder, self.username, self.parameters['new_dataset_name'][0].replace(' ', '_'), sample2bam, sample2bw)
             print(processed_data_folder)
             self.update_task_status(task, 'finished', '')
         except Exception as e:
