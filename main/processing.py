@@ -228,7 +228,7 @@ class NewProcess:
         #registering reads
         sample2raw_read_counts = {}
         umi_len = int(self.parameters['umi_length_noDebarcoding'][0]) if 'has_umi_noDebarcoding' in self.parameters else 0
-        print(f'UMI>{umi_len}')
+        print(f'UMI>{umi_len}' if umi_len > 0 else 'UMI>0')
         for file in renamed_filenames:
             with gzip.open('{}'.format(file), 'rt') as f:
                 read_counts = {}
@@ -243,18 +243,22 @@ class NewProcess:
                         seq_list.append(seq.strip())
                         read = []
 
+
                 if umi_len > 0:
                     for read in set(seq_list):
-                        try:
-                            read_counts[read[umi_len:]] += 1
-                        except:
-                            read_counts[read[umi_len:]] = 1
+                        curr_read = read[umi_len:]
+                        if len(curr_read) >= self.min_read_len:
+                            try:
+                                read_counts[read[umi_len:]] += 1
+                            except:
+                                read_counts[read[umi_len:]] = 1
                 else:
                     for read in seq_list:
-                        try:
-                            read_counts[read] += 1
-                        except:
-                            read_counts[read] = 1
+                        if len(read) >= self.min_read_len:
+                            try:
+                                read_counts[read] += 1
+                            except:
+                                read_counts[read] = 1
 
                 sample2raw_read_counts[file2sample[file]] = sum([read_counts[curr] for curr in read_counts])
 
@@ -264,7 +268,7 @@ class NewProcess:
                 all_fa = []
                 for seq in read_counts:
                     for i in range(read_counts[seq]):
-                        all_fa.append('>{}_{}\n{}'.format(seq, i + 1, seq))
+                        all_fa.append(f'>{seq}_{i+1}\n{seq}')
 
                 with open('sample___{}.all.fa'.format(file2sample[file]), 'w') as f:
                     f.write('\n'.join(all_fa))
@@ -350,7 +354,7 @@ class NewProcess:
                 if line_number % 4 == 0:
                     sample, seq, reverse = self.processRead(read, barcode2sample, rev_barcode2sample)
                     read = []
-                    if seq:
+                    if seq and len(seq) >= self.min_read_len:
                         sample2reads[sample].append(seq)
                         reverse_barcode_count += reverse
                     elif sample:
@@ -368,14 +372,14 @@ class NewProcess:
         for sample in parameters['new_sample']:
             #print('>sample', sample)
             read_counts = {}
-            if umi_len:
+            if umi_len > 0:
                 for read in set([read for read in sample2reads[sample]]):
                     curr_read = read[umi_len:]
                     if len(curr_read) >= self.min_read_len:
                         try:
-                            read_counts[read[umi_len:]] += 1
+                            read_counts[curr_read] += 1
                         except:
-                            read_counts[read[umi_len:]] = 1
+                            read_counts[curr_read] = 1
             else:
                 for read in sample2reads[sample]:
                     if len(read) >= self.min_read_len:
