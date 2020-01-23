@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="JBrowse is back">
+    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="fixing adapter sequence">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/processing.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,11 +18,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="215" column="75" selection-start-line="215" selection-start-column="75" selection-end-line="215" selection-end-column="75" />
+            <state relative-caret-position="6693">
+              <caret line="291" column="22" lean-forward="true" selection-start-line="291" selection-start-column="22" selection-end-line="291" selection-end-column="22" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/_modal_new_dataset.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="278" column="45" selection-start-line="278" selection-start-column="29" selection-end-line="278" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -39,8 +47,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>self.username</find>
-      <find>sample__</find>
       <find>.bw</find>
       <find>jbrow</find>
       <find>.conf</find>
@@ -68,7 +74,9 @@
       <find>align_samples</find>
       <find>prepare_for_JBrowse</find>
       <find>createJSONConf</find>
+      <find>umi</find>
       <find>adapter_sequence</find>
+      <find>adapter_Seq</find>
     </findStrings>
     <replaceStrings>
       <replace>sample___</replace>
@@ -88,11 +96,11 @@
         <option value="$PROJECT_DIR$/smallrna/settings.py" />
         <option value="$PROJECT_DIR$/db_instructions.txt" />
         <option value="$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir11/cutadapt_report.txt" />
-        <option value="$PROJECT_DIR$/templates/_modal_new_dataset.html" />
         <option value="$PROJECT_DIR$/main/static/css/floating_label.css" />
         <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/main/views.py" />
         <option value="$PROJECT_DIR$/main/models.py" />
+        <option value="$PROJECT_DIR$/templates/_modal_new_dataset.html" />
         <option value="$PROJECT_DIR$/main/processing.py" />
       </list>
     </option>
@@ -140,6 +148,11 @@
               <item name="~/PycharmProjects/smallrna2" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="static" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="upload" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="smallrna2" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PycharmProjects/smallrna2" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -244,7 +257,7 @@
       <workItem from="1579210569754" duration="2142000" />
       <workItem from="1579297804822" duration="2572000" />
       <workItem from="1579735325625" duration="867000" />
-      <workItem from="1579806817361" duration="11059000" />
+      <workItem from="1579806817361" duration="12151000" />
     </task>
     <task id="LOCAL-00001" summary="finished model.">
       <created>1560369193209</created>
@@ -554,11 +567,25 @@
       <option name="project" value="LOCAL" />
       <updated>1579820035632</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="checking adapter sequence">
+      <created>1579820889852</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1579820889852</updated>
+    </task>
+    <task id="LOCAL-00046" summary="fixing adapter sequence">
+      <created>1579821738178</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1579821738178</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105170000" />
+    <option name="totallyTimeSpent" value="106262000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -602,8 +629,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="debarcoding part is now implemented, needs testing." />
-    <MESSAGE value="adding adapter and umi removal to no-need-barcoding part" />
     <MESSAGE value="no need for barcoding part works now. Counts_fa is OK, now time for JBrowser and alignments" />
     <MESSAGE value="bugs fixed, now alignment and JBrowse." />
     <MESSAGE value="alignment part implemented, now testing" />
@@ -627,10 +652,11 @@
     <MESSAGE value="verbose" />
     <MESSAGE value="hideSecondary:False for JBrowse Alignments2" />
     <MESSAGE value="JBrowse is back" />
-    <option name="LAST_COMMIT_MESSAGE" value="JBrowse is back" />
+    <MESSAGE value="checking adapter sequence" />
+    <MESSAGE value="fixing adapter sequence" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing adapter sequence" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir13/cutadapt_report.txt" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir13/dataset_annotation.json" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/b4/cutadapt_report.txt" />
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/b4/temp/merged.fastq" />
@@ -724,10 +750,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/_modal_new_dataset.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="278" column="45" selection-start-line="278" selection-start-column="29" selection-end-line="278" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="215" column="75" selection-start-line="215" selection-start-column="75" selection-end-line="215" selection-end-column="75" />
+        <state relative-caret-position="6693">
+          <caret line="291" column="22" lean-forward="true" selection-start-line="291" selection-start-column="22" selection-end-line="291" selection-end-column="22" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>
