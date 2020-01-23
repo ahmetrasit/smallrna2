@@ -95,7 +95,7 @@ class NewProcess:
         bash_command = ''
         if file_type == 'counts.fa':
             bash_command = ' '.join(['for sample in sample___*{};'.format(file_type),
-                                     'do echo $sample; hisat2 --dta-cufflinks --quiet -f -a -p {} -x {}{} -U $sample -S $sample.{}.sam;'.format(self.max_cpu, self.ref_folder, reference2index[reference], reference),
+                                     'do echo $sample; hisat2 --dta-cufflinks -f -a -p {} -x {}{} -U $sample -S $sample.{}.sam;'.format(self.max_cpu, self.ref_folder, reference2index[reference], reference),
                                      'done'])
         else:
             print('jbrowse-required files')
