@@ -211,9 +211,9 @@ class NewProcess:
         renamed_filenames = [file for file in os.listdir('./') if file.startswith('sample___') and file.endswith('fastq.gz')]
 
         # remove adapter
-        if 'remove_adapter' in self.parameters:
-            adapter = self.parameters['adapter_sequence'][0].strip()
-            print(f'ADAPTER>{adapter}', self.parameters['adapter_sequence'])
+        if 'remove_adapter_noDebarcoding' in self.parameters:
+            adapter = self.parameters['adapter_sequence_noDebarcoding'][0].strip()
+            print(f'ADAPTER>{adapter}', self.parameters['adapter_sequence_noDebarcoding'])
             for file in renamed_filenames:
                 bash_command = ' '.join(
                     ['cutadapt', '-a', adapter, '-j', str(self.max_cpu), f'-m {self.min_read_len} -o', f'{file}.trimmed.fastq.gz',
@@ -295,8 +295,8 @@ class NewProcess:
 
         #remove adapter
         print('parameters', self.parameters)
-        if 'remove_adapter' in self.parameters:
-            adapter = self.parameters['adapter_sequence'][0].strip()
+        if 'remove_adapter_needsDebarcoding' in self.parameters:
+            adapter = self.parameters['adapter_sequence_needsDebarcoding'][0].strip()
 
             bash_command = ' '.join(['cutadapt', '-a', adapter, '-j', str(self.max_cpu), '-m 10 -o', './temp/trimmed.fastq.gz', './temp/merged.fastq.gz', '; mv', './temp/trimmed.fastq.gz', './temp/merged.fastq.gz'])
             cutadapt_cmd = subprocess.Popen(bash_command, shell=True, stdout=subprocess.PIPE)
