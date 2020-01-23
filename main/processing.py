@@ -104,7 +104,7 @@ class NewProcess:
                                 f'cat $sample.{reference}.sam | samtools view -@ {self.max_cpu} -Shub - | samtools sort -@ {self.max_cpu} - -o $sample.{reference}.bam; samtools index $sample.{reference}.bam; ',
                                 f'dep=$(samtools view -c -F 260 $sample.{reference}.bam); ratio=$(echo "scale=3; 1000000/$dep" | bc); ',
                                 f'genomeCoverageBed -split -bg -scale $ratio -g {self.ref_folder}ws270.sizes.genome -ibam $sample.{reference}.bam > $sample.{reference}.bedgraph; ',
-                                f'{self.ref_folder}ucsc-tools/wigToBigWig -clip $sample.{reference}.bedgraph {self.ref_folder}ws270.sizes.genome $sample.{reference}.bw; ',
+                                f'wigToBigWig -clip $sample.{reference}.bedgraph {self.ref_folder}ws270.sizes.genome $sample.{reference}.bw; ',
                                 'done'])
             print('H2>', bash_command)
         hisat2_cmd = subprocess.Popen(bash_command, shell=True)
@@ -439,35 +439,8 @@ class NewProcess:
 
     def createJSONConf(self, username, dataset, sample2bam, sample2bw):
         bam_tracks = [self.addBAMTrack(username, dataset, sample, sample2bam[sample]) for sample in sample2bam]
-        bw_tracks = [self.addBWTrack(username, dataset, sample, sample2bam[sample]) for sample in sample2bw]
+        bw_tracks = [self.addBWTrack(username, dataset, sample, sample2bw[sample]) for sample in sample2bw]
         return {"tracks": bam_tracks + bw_tracks}
 
 
 
-
-
-        '''
-        #split file into smaller chunks, preparing for parallel debarcoding
-        split_cmd = subprocess.Popen(''.join(['split -l 200000 ', './temp/merged.fastq.gz', 'chunk']), shell=True)
-        split_cmd.wait()
-        split_files = [file for file in os.listdir('./temp') if file.startswith('chunk')]
-        print('split_files', split_files)
-
-
-        #start parallel debarcoding
-        m = multiprocessing.Manager()
-        start_q = m.Queue()
-        end_q = m.Queue()
-        jobs = []
-        pool = multiprocessing.Pool(processes=self.max_cpu)
-        for file in split_files:
-            jobs.append(pool.apply_async(self.debarcodeFile, args=([file, start_q, end_q],)))
-
-        cont = True
-        while cont:
-            if end_q.qsize() == len(split_files):
-                cont = False
-                break
-            time.sleep(2)
-
-        '''
