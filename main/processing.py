@@ -216,7 +216,7 @@ class NewProcess:
             for file in renamed_filenames:
                 bash_command = ' '.join(
                     ['cutadapt', '-a', adapter, '-j', str(self.max_cpu), f'-m {self.min_read_len} -o', f'{file}.trimmed.fastq.gz',
-                     '{file}',
+                     f'{file}',
                      '; mv', '{}.trimmed.fastq.gz'.format(file), '{}'.format(file)])
                 cutadapt_cmd = subprocess.Popen(bash_command, shell=True, stdout=subprocess.PIPE)
                 stdout = str(cutadapt_cmd.communicate()[0], 'utf-8').split('\n')
