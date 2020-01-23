@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="bug fix">
+    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="jbrowse conf json file is ready, waiting to be tested.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/processing.py" afterDir="false" />
     </list>
@@ -19,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="68" column="113" lean-forward="true" selection-start-line="68" selection-start-column="113" selection-end-line="68" selection-end-column="113" />
+            <state relative-caret-position="243">
+              <caret line="52" column="17" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="17" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -56,8 +56,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>start_background_process3</find>
-      <find>start_background_process</find>
       <find>save_raw</find>
       <find>multipro</find>
       <find>task_aft</find>
@@ -86,6 +84,8 @@
       <find>sample__</find>
       <find>.bw</find>
       <find>align_samples</find>
+      <find>sample2bw</find>
+      <find>print</find>
     </findStrings>
     <replaceStrings>
       <replace>sample___</replace>
@@ -128,6 +128,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -161,7 +162,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -260,7 +260,8 @@
       <workItem from="1579204659584" duration="3707000" />
       <workItem from="1579210569754" duration="2142000" />
       <workItem from="1579297804822" duration="2572000" />
-      <workItem from="1579735325625" duration="828000" />
+      <workItem from="1579735325625" duration="867000" />
+      <workItem from="1579806817361" duration="531000" />
     </task>
     <task id="LOCAL-00001" summary="finished model.">
       <created>1560369193209</created>
@@ -465,11 +466,18 @@
       <option name="project" value="LOCAL" />
       <updated>1579305335039</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="jbrowse conf json file is ready, waiting to be tested.">
+      <created>1579736179038</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1579736179038</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94072000" />
+    <option name="totallyTimeSpent" value="94642000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -484,7 +492,7 @@
     <frame x="411" y="23" width="1920" height="1311" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10756124" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1086262" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -495,8 +503,8 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3297785" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49840257" weight="0.32895815" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49893504" visible="true" weight="0.340443" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50106496" side_tool="true" visible="true" weight="0.340443" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49840257" visible="true" weight="0.340443" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50159746" side_tool="true" visible="true" weight="0.340443" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32981133" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
@@ -537,7 +545,8 @@
     <MESSAGE value="increased max_cpu for admin" />
     <MESSAGE value="better error message" />
     <MESSAGE value="bug fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fix" />
+    <MESSAGE value="jbrowse conf json file is ready, waiting to be tested." />
+    <option name="LAST_COMMIT_MESSAGE" value="jbrowse conf json file is ready, waiting to be tested." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir13/cutadapt_report.txt" />
@@ -623,8 +632,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="68" column="113" lean-forward="true" selection-start-line="68" selection-start-column="113" selection-end-line="68" selection-end-column="113" />
+        <state relative-caret-position="243">
+          <caret line="52" column="17" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="17" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>

@@ -47,7 +47,7 @@ class NewProcess:
             #pool.apply_async(func, args=(param,), callback=lambda: print('callback works'))
             p = multiprocessing.Process(target=func, args=(param,))
             p.start()
-            print('start_background_process2')
+            #print('start_background_process2')
             #func(param)
         except Exception as e:
             print('something wrong with the sbp')
@@ -60,12 +60,12 @@ class NewProcess:
             while wait:
                 time.sleep(1)
                 wait = self.check_task_status(task)
-                print('in while')
+                #print('in while')
             next_task = self.determine_next_task()
             processed_data_folder = next_task(raw_data_folder)
-            print('>Aligning data')
+            #print('>Aligning data')
             sample2bam, sample2bw = self.align_samples(processed_data_folder)
-            print('>Prepare for JBrowse')
+            #print('>Prepare for JBrowse')
             self.prepare_for_JBrowse(processed_data_folder, self.username, self.parameters['new_dataset_name'], sample2bam, sample2bw)
             print(processed_data_folder)
             self.update_task_status(task, 'finished', '')
@@ -84,9 +84,9 @@ class NewProcess:
 
     def align2(self, folder, file_type, reference):
         reference2index = {'genome':'ws270hisat2', 'metagenes':'ws268metagenome', 'structural':'ws268struc_metagenome'}
-        print(file_type, reference)
+        #print(file_type, reference)
         curr_directory = os.getcwd()
-        print(curr_directory)
+        #print(curr_directory)
         #os.chdir(folder)
         if file_type == 'counts.fa':
             bash_command = ' '.join(['for sample in sample___*{};'.format(file_type),
@@ -101,11 +101,11 @@ class NewProcess:
                                 'genomeCoverageBed -split -bg -scale $ratio -g {}ws270.sizes.genome -ibam $sample.{}.bam > $sample.{}.bedgraph;'.format(self.ref_folder, reference, reference),
                                 '{}ucsc-tools/wigToBigWig -clip $sample.{}.bedgraph {}ws270.sizes.genome $sample.{}.bw;'.format(self.ref_folder, reference, self.ref_folder, reference),
                                 'done'])
-        print('H2>', bash_command)
+        #print('H2>', bash_command)
         hisat2_cmd = subprocess.Popen(bash_command, shell=True)
         hisat2_cmd.wait()
 
-    def prepare_for_JBrowse(self, folder, username, dataset, sample2bam, sample2b):
+    def prepare_for_JBrowse(self, folder, username, dataset, sample2bam, sample2bw):
         conf_dict = self.createJSONConf(username, dataset, sample2bam, sample2bw)
         with open(f'{folder}/{dataset}.conf', 'w') as f:
             json.dump(conf_dict, f)
@@ -139,13 +139,13 @@ class NewProcess:
         return False
 
     def determine_next_task(self):
-        print('determine_next_task', self.parameters['new_dataset_focus'][0])
-        print()
+        #print('determine_next_task', self.parameters['new_dataset_focus'][0])
+        #print()
         if self.parameters['new_dataset_focus'][0] == 'needs debarcoding':
-            print('debarcode_and_counts_fa')
+            #print('debarcode_and_counts_fa')
             return self.debarcode_and_counts_fa
         else:
-            print('create_counts_fa')
+            #print('create_counts_fa')
             return self.create_counts_fa
 
     def save_raw_data(self):
@@ -185,7 +185,7 @@ class NewProcess:
         file_names = self.parameters['uploaded_file_names']
         file2sample = {}
         for file, sample in list(zip(file_names, sample_names)):
-            print(file, sample)
+            #print(file, sample)
             try:
                 rename_files_cmd = subprocess.Popen('mv {} sample___{}.fastq.gz'.format(file, sample), shell=True)
                 file2sample['sample___{}.fastq.gz'.format(sample)] = sample
@@ -259,12 +259,12 @@ class NewProcess:
 
     def debarcode_and_counts_fa(self, raw_data_folder):
         files = [file for file in os.listdir(raw_data_folder) if file.endswith('fastq.gz')]
-        print(files)
+        #print(files)
 
         os.makedirs(raw_data_folder + '/' + 'temp')
         curr_directory = os.getcwd()
         os.chdir(raw_data_folder)
-        print(curr_directory, os.getcwd())
+        #print(curr_directory, os.getcwd())
 
         #merge files
         cat_cmd = subprocess.Popen(' '.join(['ls; echo hey;', 'cat', ' '.join(files), '>', './temp/merged.fastq.gz']), shell=True)
@@ -317,7 +317,7 @@ class NewProcess:
             rev_barcode2sample[self.revComp(seq)] = barcode2sample_template[seq]
             rev_barcode2sample[self.revComp(seq[2:])] = barcode2sample_template[seq]
             rev_barcode2sample[self.revComp(seq[:-2])] = barcode2sample_template[seq]
-        print(barcode2sample, rev_barcode2sample)
+        #print(barcode2sample, rev_barcode2sample)
 
         sample2reads = {sample:[] for sample in parameters['new_sample']}
         rest_barcodes = {}
@@ -350,7 +350,7 @@ class NewProcess:
         print('create counts.fa and all.fa')
         sample2raw_read_counts = {}
         for sample in parameters['new_sample']:
-            print('>sample', sample)
+            #print('>sample', sample)
             read_counts = {}
             if umi_len:
                 for read in set([read for read in sample2reads[sample]]):
