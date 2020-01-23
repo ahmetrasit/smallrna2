@@ -113,7 +113,7 @@ class NewProcess:
         with open('tracks.json', 'w') as f:
             json.dump(conf_dict, f)
         try:
-            move_to_jbrowse = subprocess.Popen(f'cp ../{folder} /var/www/html/jbrowse/dev/datasets/', shell=True)
+            move_to_jbrowse = subprocess.Popen(f'cp -r ../{folder} /var/www/html/jbrowse/dev/datasets/', shell=True)
             move_to_jbrowse.wait()
         except Exception as e:
             print('copy file to jbrowse exception', str(e))
@@ -133,10 +133,14 @@ class NewProcess:
 
     @staticmethod
     def update_task_status(task, status, message):
-        task.status = status
-        task.message = message
-        task.save()
-        return task
+        try:
+            task.status = status
+            task.message = message
+            task.save()
+            return task
+        except Exception as e:
+            print('error updating task status')
+
 
     def check_task_status(self, task):
         no_of_active_tasks = len(models.Task.objects.filter(status = 'running'))
@@ -237,7 +241,7 @@ class NewProcess:
                         seq_list.append(seq.strip())
                         read = []
 
-                if umi_len:
+                if umi_len > 0:
                     for read in set(seq_list):
                         try:
                             read_counts[read[umi_len:]] += 1
