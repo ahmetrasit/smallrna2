@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="verbose">
+    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="JBrowse is back">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/processing.py" afterDir="false" />
     </list>
@@ -19,30 +19,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="418" lean-forward="true" selection-start-line="418" selection-end-line="418" />
+            <state relative-caret-position="332">
+              <caret line="215" column="75" selection-start-line="215" selection-start-column="75" selection-end-line="215" selection-end-column="75" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="110" column="23" selection-start-line="110" selection-start-column="23" selection-end-line="110" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#68#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/migrations/0002_auto_20200117_2241.py">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -56,9 +39,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>id</find>
-      <find>ahmet</find>
-      <find>260</find>
       <find>self.username</find>
       <find>sample__</find>
       <find>.bw</find>
@@ -66,13 +46,10 @@
       <find>.conf</find>
       <find>dataset</find>
       <find>print</find>
-      <find>createJSONConf</find>
       <find>sample2bw</find>
-      <find>align_samples</find>
       <find>align_sam</find>
       <find>conf</find>
       <find>jbrowse</find>
-      <find>prepare_for_JBrowse</find>
       <find>mv</find>
       <find>mv</find>
       <find>cp</find>
@@ -86,6 +63,12 @@
       <find>sample2reads</find>
       <find>umi_len</find>
       <find>dep</find>
+      <find>wig</find>
+      <find>2bw</find>
+      <find>align_samples</find>
+      <find>prepare_for_JBrowse</find>
+      <find>createJSONConf</find>
+      <find>adapter_sequence</find>
     </findStrings>
     <replaceStrings>
       <replace>sample___</replace>
@@ -261,7 +244,7 @@
       <workItem from="1579210569754" duration="2142000" />
       <workItem from="1579297804822" duration="2572000" />
       <workItem from="1579735325625" duration="867000" />
-      <workItem from="1579806817361" duration="9355000" />
+      <workItem from="1579806817361" duration="11059000" />
     </task>
     <task id="LOCAL-00001" summary="finished model.">
       <created>1560369193209</created>
@@ -557,11 +540,25 @@
       <option name="project" value="LOCAL" />
       <updated>1579817798247</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="hideSecondary:False for JBrowse Alignments2">
+      <created>1579818742724</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1579818742724</updated>
+    </task>
+    <task id="LOCAL-00044" summary="JBrowse is back">
+      <created>1579820035632</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1579820035632</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103466000" />
+    <option name="totallyTimeSpent" value="105170000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -605,8 +602,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="implementing parallel debarcoding" />
-    <MESSAGE value="UMI option added to UI" />
     <MESSAGE value="debarcoding part is now implemented, needs testing." />
     <MESSAGE value="adding adapter and umi removal to no-need-barcoding part" />
     <MESSAGE value="no need for barcoding part works now. Counts_fa is OK, now time for JBrowser and alignments" />
@@ -630,7 +625,9 @@
     <MESSAGE value="molfix" />
     <MESSAGE value="molfix2" />
     <MESSAGE value="verbose" />
-    <option name="LAST_COMMIT_MESSAGE" value="verbose" />
+    <MESSAGE value="hideSecondary:False for JBrowse Alignments2" />
+    <MESSAGE value="JBrowse is back" />
+    <option name="LAST_COMMIT_MESSAGE" value="JBrowse is back" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir13/cutadapt_report.txt" />
@@ -729,8 +726,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="418" lean-forward="true" selection-start-line="418" selection-end-line="418" />
+        <state relative-caret-position="332">
+          <caret line="215" column="75" selection-start-line="215" selection-start-column="75" selection-end-line="215" selection-end-column="75" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>

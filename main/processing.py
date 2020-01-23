@@ -213,6 +213,7 @@ class NewProcess:
         # remove adapter
         if 'remove_adapter' in self.parameters:
             adapter = self.parameters['adapter_sequence'][0].strip()
+            print(f'ADAPTER>{adapter}', self.parameters['adapter_sequence'])
             for file in renamed_filenames:
                 bash_command = ' '.join(
                     ['cutadapt', '-a', adapter, '-j', str(self.max_cpu), f'-m {self.min_read_len} -o', f'{file}.trimmed.fastq.gz',
@@ -296,6 +297,7 @@ class NewProcess:
         print('parameters', self.parameters)
         if 'remove_adapter' in self.parameters:
             adapter = self.parameters['adapter_sequence'][0].strip()
+
             bash_command = ' '.join(['cutadapt', '-a', adapter, '-j', str(self.max_cpu), '-m 10 -o', './temp/trimmed.fastq.gz', './temp/merged.fastq.gz', '; mv', './temp/trimmed.fastq.gz', './temp/merged.fastq.gz'])
             cutadapt_cmd = subprocess.Popen(bash_command, shell=True, stdout=subprocess.PIPE)
             stdout = str(cutadapt_cmd.communicate()[0], 'utf-8').split('\n')
