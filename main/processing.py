@@ -80,7 +80,7 @@ class NewProcess:
         self.align2(folder, 'counts.fa', 'genome')
         self.align2(folder, 'counts.fa', 'metagenes')
         self.align2(folder, 'counts.fa', 'structural')
-        return {sample: f'sample___{sample}.fastq.gz' for sample in samples}, {sample: f'sample___{sample}.genome.bw' for sample in samples}
+        return {sample: f'sample___{sample}.all.fa.genome.bam' for sample in samples}, {sample: f'sample___{sample}.all.fa.genome.bw' for sample in samples}
 
     def align2(self, folder, file_type, reference):
         reference2index = {'genome':'ws270hisat2', 'metagenes':'ws268metagenome', 'structural':'ws268struc_metagenome'}
