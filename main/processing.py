@@ -14,6 +14,7 @@ class NewProcess:
     max_active_tasks = 1
     max_cpu = 10
     ref_folder = '../../../../reference/'
+    min_read_len = 10
     pairs = {'AGNCT'[i]: 'AGNCT'[4 - i] for i in range(5)}
 
     def revComp(self, seq):
@@ -91,6 +92,7 @@ class NewProcess:
         curr_directory = os.getcwd()
         #print(curr_directory)
         #os.chdir(folder)
+        bash_command = ''
         if file_type == 'counts.fa':
             bash_command = ' '.join(['for sample in sample___*{};'.format(file_type),
                                      'do echo $sample; hisat2 --dta-cufflinks --quiet -f -a -p {} -x {}{} -U $sample -S $sample.{}.sam;'.format(self.max_cpu, self.ref_folder, reference2index[reference], reference),
@@ -104,7 +106,7 @@ class NewProcess:
                                 f'genomeCoverageBed -split -bg -scale $ratio -g {self.ref_folder}ws270.sizes.genome -ibam $sample.{reference}.bam > $sample.{reference}.bedgraph; ',
                                 f'{self.ref_folder}ucsc-tools/wigToBigWig -clip $sample.{reference}.bedgraph {self.ref_folder}ws270.sizes.genome $sample.{reference}.bw; ',
                                 'done'])
-        print('H2>', bash_command)
+            print('H2>', bash_command)
         hisat2_cmd = subprocess.Popen(bash_command, shell=True)
         hisat2_cmd.wait()
 
@@ -213,8 +215,8 @@ class NewProcess:
             adapter = self.parameters['adapter_sequence'][0].strip()
             for file in renamed_filenames:
                 bash_command = ' '.join(
-                    ['cutadapt', '-a', adapter, '-j', str(self.max_cpu), '-m 10 -o', '{}.trimmed.fastq.gz'.format(file),
-                     '{}'.format(file),
+                    ['cutadapt', '-a', adapter, '-j', str(self.max_cpu), f'-m {self.min_read_len} -o', f'{file}.trimmed.fastq.gz',
+                     '{file}',
                      '; mv', '{}.trimmed.fastq.gz'.format(file), '{}'.format(file)])
                 cutadapt_cmd = subprocess.Popen(bash_command, shell=True, stdout=subprocess.PIPE)
                 stdout = str(cutadapt_cmd.communicate()[0], 'utf-8').split('\n')
@@ -296,7 +298,7 @@ class NewProcess:
             with open('cutadapt_report.txt', 'w') as f:
                 f.write('\n'.join(stdout))
             cutadapt_cmd.wait()
-            print('adapters removed')
+            print('adapters removed', bash_command)
 
         try:
             debarcode_summary = self.debarcodeFile('./temp/merged.fastq.gz', self.parameters)
@@ -368,16 +370,19 @@ class NewProcess:
             read_counts = {}
             if umi_len:
                 for read in set([read for read in sample2reads[sample]]):
-                    try:
-                        read_counts[read[umi_len:]] += 1
-                    except:
-                        read_counts[read[umi_len:]] = 1
+                    curr_read = read[umi_len:]
+                    if len(curr_read) >= self.min_read_len:
+                        try:
+                            read_counts[read[umi_len:]] += 1
+                        except:
+                            read_counts[read[umi_len:]] = 1
             else:
                 for read in sample2reads[sample]:
-                    try:
-                        read_counts[read] += 1
-                    except:
-                        read_counts[read] = 1
+                    if len(read) >= self.min_read_len:
+                        try:
+                            read_counts[read] += 1
+                        except:
+                            read_counts[read] = 1
 
             sample2raw_read_counts[sample] = sum([read_counts[curr] for curr in read_counts])
 

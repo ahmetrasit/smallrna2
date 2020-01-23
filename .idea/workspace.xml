@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="mv files to jbrowse bug fix">
+    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="fixing bash commands for bigwig - 1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/processing.py" afterDir="false" />
     </list>
@@ -19,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="404">
-              <caret line="141" column="45" selection-start-line="141" selection-start-column="45" selection-end-line="141" selection-end-column="45" />
+            <state relative-caret-position="611">
+              <caret line="108" column="38" lean-forward="true" selection-start-line="108" selection-start-column="38" selection-end-line="108" selection-end-column="38" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -56,7 +56,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>default=0</find>
       <find>task</find>
       <find>addf</find>
       <find>error'</find>
@@ -74,7 +73,6 @@
       <find>sample2bw</find>
       <find>align_samples</find>
       <find>align_sam</find>
-      <find>bw</find>
       <find>conf</find>
       <find>jbrowse</find>
       <find>prepare_for_JBrowse</find>
@@ -86,6 +84,8 @@
       <find>auto</find>
       <find>submit_task</find>
       <find>update_task_status</find>
+      <find>bw</find>
+      <find>cutadapt</find>
     </findStrings>
     <replaceStrings>
       <replace>sample___</replace>
@@ -115,9 +115,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1239" />
+    <option name="x" value="266" />
     <option name="y" value="23" />
-    <option name="width" value="1246" />
+    <option name="width" value="2148" />
     <option name="height" value="1311" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -261,7 +261,7 @@
       <workItem from="1579210569754" duration="2142000" />
       <workItem from="1579297804822" duration="2572000" />
       <workItem from="1579735325625" duration="867000" />
-      <workItem from="1579806817361" duration="4495000" />
+      <workItem from="1579806817361" duration="6543000" />
     </task>
     <task id="LOCAL-00001" summary="finished model.">
       <created>1560369193209</created>
@@ -515,11 +515,25 @@
       <option name="project" value="LOCAL" />
       <updated>1579811438368</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="multiple problems">
+      <created>1579812960620</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1579812960621</updated>
+    </task>
+    <task id="LOCAL-00038" summary="fixing bash commands for bigwig - 1">
+      <created>1579813256955</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1579813256955</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98606000" />
+    <option name="totallyTimeSpent" value="100654000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -531,10 +545,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1239" y="23" width="1246" height="1311" extended-state="0" />
+    <frame x="266" y="23" width="2148" height="1311" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16943522" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.09686609" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -545,8 +559,8 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3297785" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49840257" weight="0.32895815" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49833888" visible="true" weight="0.340443" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5016611" side_tool="true" visible="true" weight="0.340443" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.4985755" visible="true" weight="0.340443" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5014245" side_tool="true" visible="true" weight="0.340443" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32981133" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
@@ -563,8 +577,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="barcode and sample name for upload ready." />
-    <MESSAGE value="barcode and sample name for upload ready" />
     <MESSAGE value="create new dataset modal ui allows barcode selection" />
     <MESSAGE value="files can be uploaded. next is data handling" />
     <MESSAGE value="switched to mysql. limiting no of active processes now working." />
@@ -588,7 +600,9 @@
     <MESSAGE value="another bug fix" />
     <MESSAGE value="mv files to jbrowse" />
     <MESSAGE value="mv files to jbrowse bug fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="mv files to jbrowse bug fix" />
+    <MESSAGE value="multiple problems" />
+    <MESSAGE value="fixing bash commands for bigwig - 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing bash commands for bigwig - 1" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir13/cutadapt_report.txt" />
@@ -687,8 +701,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="141" column="45" selection-start-line="141" selection-start-column="45" selection-end-line="141" selection-end-column="45" />
+        <state relative-caret-position="611">
+          <caret line="108" column="38" lean-forward="true" selection-start-line="108" selection-start-column="38" selection-end-line="108" selection-end-column="38" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>
