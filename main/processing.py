@@ -66,8 +66,11 @@ class NewProcess:
             #print('>Aligning data')
             sample2bam, sample2bw = self.align_samples(processed_data_folder)
             #print('>Prepare for JBrowse')
-            self.prepare_for_JBrowse(self.username, self.parameters['new_dataset_name'][0].replace(' ', '_'), sample2bam, sample2bw)
+            curr_folder = raw_data_folder.split('/')[-1]
+            print(f'CF>{curr_folder}')
+            self.prepare_for_JBrowse(curr_folder, self.username, self.parameters['new_dataset_name'][0].replace(' ', '_'), sample2bam, sample2bw)
             print(processed_data_folder)
+
             self.update_task_status(task, 'finished', '')
         except Exception as e:
             print('error_tau', str(e))
@@ -105,10 +108,11 @@ class NewProcess:
         hisat2_cmd = subprocess.Popen(bash_command, shell=True)
         hisat2_cmd.wait()
 
-    def prepare_for_JBrowse(self, username, dataset, sample2bam, sample2bw):
+    def prepare_for_JBrowse(self, folder, username, dataset, sample2bam, sample2bw):
         conf_dict = self.createJSONConf(username, dataset, sample2bam, sample2bw)
-        with open(f'{dataset}.conf', 'w') as f:
+        with open('tracks.json', 'w') as f:
             json.dump(conf_dict, f)
+        move_to_jbrowse = subprocess.Popen(f'cp ../{folder} /var/www/html/jbrowse/dev/datasets/', shell=True)
 
     def submit_task(self):
         try:
@@ -213,6 +217,7 @@ class NewProcess:
         #registering reads
         sample2raw_read_counts = {}
         umi_len = int(self.parameters['umi_length_noDebarcoding'][0]) if 'has_umi_noDebarcoding' in self.parameters else 0
+        print(f'UMI>{umi_len}')
         for file in renamed_filenames:
             with gzip.open('{}'.format(file), 'rt') as f:
                 read_counts = {}
