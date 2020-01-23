@@ -413,6 +413,7 @@ class NewProcess:
                 "className": "function(feature){return \'feature2\'}"
             },
             "type": "Alignments2",
+            "hideSecondary": False,
             "urlTemplate": f"{bam_file}"
         }
 

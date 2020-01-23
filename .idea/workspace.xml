@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="molfix">
+    <list default="true" id="be3b2898-0ea5-4c65-b038-4b4f6d83a4c3" name="Default" comment="verbose">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/processing.py" afterDir="false" />
     </list>
@@ -19,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-427">
-              <caret line="237" column="30" lean-forward="true" selection-start-line="237" selection-start-column="30" selection-end-line="237" selection-end-column="30" />
+            <state relative-caret-position="299">
+              <caret line="418" lean-forward="true" selection-start-line="418" selection-end-line="418" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -56,7 +56,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>error'</find>
       <find>id</find>
       <find>ahmet</find>
       <find>260</find>
@@ -86,6 +85,7 @@
       <find>cutadapt</find>
       <find>sample2reads</find>
       <find>umi_len</find>
+      <find>dep</find>
     </findStrings>
     <replaceStrings>
       <replace>sample___</replace>
@@ -261,7 +261,7 @@
       <workItem from="1579210569754" duration="2142000" />
       <workItem from="1579297804822" duration="2572000" />
       <workItem from="1579735325625" duration="867000" />
-      <workItem from="1579806817361" duration="7576000" />
+      <workItem from="1579806817361" duration="9355000" />
     </task>
     <task id="LOCAL-00001" summary="finished model.">
       <created>1560369193209</created>
@@ -543,11 +543,25 @@
       <option name="project" value="LOCAL" />
       <updated>1579815775741</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="molfix2">
+      <created>1579816674310</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1579816674310</updated>
+    </task>
+    <task id="LOCAL-00042" summary="verbose">
+      <created>1579817798247</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1579817798247</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101687000" />
+    <option name="totallyTimeSpent" value="103466000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -591,8 +605,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="switched to mysql. limiting no of active processes now working." />
-    <MESSAGE value="db instructions for mysql" />
     <MESSAGE value="implementing parallel debarcoding" />
     <MESSAGE value="UMI option added to UI" />
     <MESSAGE value="debarcoding part is now implemented, needs testing." />
@@ -616,7 +628,9 @@
     <MESSAGE value="fixing bash commands for bigwig - 1" />
     <MESSAGE value="bigwig not working" />
     <MESSAGE value="molfix" />
-    <option name="LAST_COMMIT_MESSAGE" value="molfix" />
+    <MESSAGE value="molfix2" />
+    <MESSAGE value="verbose" />
+    <option name="LAST_COMMIT_MESSAGE" value="verbose" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/static/upload/raw/Ahmet.Ozturk/bir13/cutadapt_report.txt" />
@@ -715,8 +729,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-427">
-          <caret line="237" column="30" lean-forward="true" selection-start-line="237" selection-start-column="30" selection-end-line="237" selection-end-column="30" />
+        <state relative-caret-position="299">
+          <caret line="418" lean-forward="true" selection-start-line="418" selection-end-line="418" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>
